@@ -68,7 +68,7 @@ if __name__ == "__main__":
             except:
                 if VERBOSE:
                     print("Failed to clone: %s" % repo_url, file=stderr)
-                outfile.write("%s,0\n" % account); continue
+                outfile.write("%s,0\n" % account); outfile.flush(); continue
 
         # revert to last commit before deadline
         chdir(repo)
@@ -81,7 +81,7 @@ if __name__ == "__main__":
         if submission_commit is None:
             if VERBOSE:
                 print("No on-time submission for: %s" % account, file=stderr)
-            outfile.write("%s,0\n" % account); continue
+            outfile.write("%s,0\n" % account); outfile.flush(); continue
         check_output(['git','reset','--hard',submission_commit]); chdir(orig_dir)
 
         # grade submission
