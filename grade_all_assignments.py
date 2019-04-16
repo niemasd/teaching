@@ -20,7 +20,7 @@ def parse_args():
     parser.add_argument('-g', '--group', required=True, type=str, help="GitHub Group")
     parser.add_argument('-p', '--prefix', required=True, type=str, help="Repository Name Prefix")
     parser.add_argument('-gs', '--script', required=True, type=str, help='Grading Script (usage must be ./<script> <repo> and must print just point number to STDOUT)')
-    parser.add_argument('-d', '--deadline', required=True, type=str, help='Deadline (MM/DD/YY HH:MM)')
+    parser.add_argument('-d', '--deadline', required=True, type=str, help='Deadline (MM/DD/YY HH:MM ±HHMM)')
     parser.add_argument('-m', '--message', required=False, type=str, default=None, help="Submission Commit Message")
     parser.add_argument('-o', '--output', required=False, type=str, default='stdout', help="Output File")
     parser.add_argument('-v', '--verbose', action='store_true', help="Verbose")
@@ -29,7 +29,7 @@ def parse_args():
     students = [l.strip() for l in open(args.students)]
     group = "https://github.com/%s" % args.group
     script = abspath(args.script)
-    deadline = datetime.strptime(args.deadline, "%m/%d/%y %H:%M")
+    deadline = datetime.strptime(args.deadline, "%m/%d/%y %H:%M %z")
     if args.output == 'stdout':
         outfile = stdout
     else:
@@ -58,6 +58,7 @@ if __name__ == "__main__":
         chdir(orig_dir)
         repo = "%s-%s" % (prefix,account)
         repo_url = "%s/%s.git" % (group,repo)
+        check_output(['rm','-rf',repo])
 
         # try to clone
         try:
@@ -69,10 +70,11 @@ if __name__ == "__main__":
 
         # revert to last commit before deadline
         chdir(repo)
-        commits = [line.strip().split('\t') for line in check_output(['git','log','--pretty="format:\%s\t\%at\t\%H"'], stderr=DEVNULL).decode().replace('\\','').replace('"','').replace('format:','').splitlines()]
+        commits = [line.strip().split('\t') for line in check_output(['git','log','--pretty="format:\%s\t\%ad\t\%H"'], stderr=DEVNULL).decode().replace('\\','').replace('"','').replace('format:','').splitlines()]
+        commits = [(m,datetime.strptime(t, "%a %b %d %H:%M:%S %Y %z"),h) for m,t,h in commits]
         commits.sort(key=lambda x: x[1], reverse=True); submission_commit = None
         for m,t,h in commits:
-            if (message is None or args.message.upper() in m.upper()) and datetime.fromtimestamp(int(t)) < deadline:
+            if (message is None or message.upper() in m.upper()) and t < deadline:
                 submission_commit = h; break
         if submission_commit is None:
             if VERBOSE:
