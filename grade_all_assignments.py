@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument('-m', '--message', required=False, type=str, default=None, help="Submission Commit Message")
     parser.add_argument('-o', '--output', required=False, type=str, default='stdout', help="Output File")
     parser.add_argument('-v', '--verbose', action='store_true', help="Verbose")
-    parser.add_argument('-it', '--iterations', required=False, type=int, default=10, help="Number of times to try running grading script")
+    parser.add_argument('-it', '--iterations', required=False, type=int, default=1, help="Number of times to try running grading script")
     args = parser.parse_args()
     global VERBOSE; VERBOSE = args.verbose
     global ITER; ITER = args.iterations
