@@ -23,22 +23,25 @@ def parse_args():
     parser.add_argument('-d', '--deadline', required=True, type=str, help='Deadline (MM/DD/YY HH:MM)')
     parser.add_argument('-m', '--message', required=False, type=str, default=None, help="Submission Commit Message")
     parser.add_argument('-o', '--output', required=False, type=str, default='stdout', help="Output File")
+    parser.add_argument('-v', '--verbose', action='store_true', help="Verbose")
     args = parser.parse_args()
+    global VERBOSE; VERBOSE = args.verbose
     students = [l.strip() for l in open(args.students)]
-    print("Reading GitHub accounts from file: %s" % args.students, file=stderr)
     group = "https://github.com/%s" % args.group
-    print("GitHub Group URL: %s" % group, file=stderr)
-    print("Repo Prefix: %s" % args.prefix, file=stderr)
     script = abspath(args.script)
-    print("Grading Script: %s" % script, file=stderr)
     deadline = datetime.strptime(args.deadline, "%m/%d/%y %H:%M")
-    print("Deadline: %s" % args.deadline, file=stderr)
-    print("Submission Commit Message: %s" % args.message, file=stderr)
-    print("Output File: %s" % args.output, file=stderr)
     if args.output == 'stdout':
         outfile = stdout
     else:
         outfile = open(args.output,'w')
+    if VERBOSE:
+        print("Reading GitHub accounts from file: %s" % args.students, file=stderr)
+        print("GitHub Group URL: %s" % group, file=stderr)
+        print("Repo Prefix: %s" % args.prefix, file=stderr)
+        print("Grading Script: %s" % script, file=stderr)
+        print("Deadline: %s" % args.deadline, file=stderr)
+        print("Submission Commit Message: %s" % args.message, file=stderr)
+        print("Output File: %s" % args.output, file=stderr)
     return students, group, args.prefix, script, deadline, args.message, outfile
 
 # main function: grade all repos
@@ -48,7 +51,8 @@ if __name__ == "__main__":
     students,group,prefix,script,deadline,message,outfile = parse_args()
 
     # grade student repos
-    print("Grading student repositories...", file=stderr)
+    if VERBOSE:
+        print("Grading student repositories...", file=stderr)
     for account in students:
         # prep things
         chdir(orig_dir)
@@ -59,7 +63,9 @@ if __name__ == "__main__":
         try:
             check_output(['git','clone',repo_url], stderr=DEVNULL)
         except:
-            outfile.write("%s,0\n" % account); print("Failed to clone: %s" % repo_url, file=stderr); continue
+            if VERBOSE:
+                print("Failed to clone: %s" % repo_url, file=stderr)
+            outfile.write("%s,0\n" % account); continue
 
         # revert to last commit before deadline
         chdir(repo)
@@ -69,13 +75,17 @@ if __name__ == "__main__":
             if (message is None or args.message.upper() in m.upper()) and datetime.fromtimestamp(int(t)) < deadline:
                 submission_commit = h; break
         if submission_commit is None:
-            outfile.write("%s,0\n" % account); print("No on-time submission for: %s" % account, file=stderr); continue
+            if VERBOSE:
+                print("No on-time submission for: %s" % account, file=stderr)
+            outfile.write("%s,0\n" % account); continue
         check_output(['git','reset','--hard',submission_commit]); chdir(orig_dir)
 
         # grade submission
-        print("Grading submission for: %s" % account, file=stderr)
+        if VERBOSE:
+            print("Grading submission for: %s" % account, file=stderr)
         try:
-            score = float(check_output(['python3',script,repo]).decode())
+            score = float(check_output([script,repo]).decode())
         except:
             score = 0
-        print("%s,%f\n" % (account,score))
+        outfile.write("%s,%s\n" % (account,str(score)))
+    outfile.close()
