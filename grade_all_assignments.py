@@ -6,7 +6,7 @@ Niema Moshiri 2019
 import argparse
 from datetime import datetime
 from os import chdir,getcwd
-from os.path import abspath
+from os.path import abspath,isdir
 from subprocess import check_output,DEVNULL
 from sys import stderr,stdout
 
@@ -24,8 +24,10 @@ def parse_args():
     parser.add_argument('-m', '--message', required=False, type=str, default=None, help="Submission Commit Message")
     parser.add_argument('-o', '--output', required=False, type=str, default='stdout', help="Output File")
     parser.add_argument('-v', '--verbose', action='store_true', help="Verbose")
+    parser.add_argument('-it', '--iterations', required=False, type=int, default=10, help="Number of times to try running grading script")
     args = parser.parse_args()
     global VERBOSE; VERBOSE = args.verbose
+    global ITER; ITER = args.iterations
     students = [l.strip() for l in open(args.students)]
     group = "https://github.com/%s" % args.group
     script = abspath(args.script)
@@ -58,15 +60,15 @@ if __name__ == "__main__":
         chdir(orig_dir)
         repo = "%s-%s" % (prefix,account)
         repo_url = "%s/%s.git" % (group,repo)
-        check_output(['rm','-rf',repo])
 
         # try to clone
-        try:
-            check_output(['git','clone',repo_url], stderr=DEVNULL)
-        except:
-            if VERBOSE:
-                print("Failed to clone: %s" % repo_url, file=stderr)
-            outfile.write("%s,0\n" % account); continue
+        if not isdir(repo):
+            try:
+                check_output(['git','clone',repo_url], stderr=DEVNULL)
+            except:
+                if VERBOSE:
+                    print("Failed to clone: %s" % repo_url, file=stderr)
+                outfile.write("%s,0\n" % account); continue
 
         # revert to last commit before deadline
         chdir(repo)
@@ -85,9 +87,13 @@ if __name__ == "__main__":
         # grade submission
         if VERBOSE:
             print("Grading submission for: %s" % account, file=stderr)
-        try:
-            score = float(check_output([script,repo]).decode())
-        except:
-            score = 0
-        outfile.write("%s,%s\n" % (account,str(score)))
+        score = 0
+        for _ in range(ITER):
+            try:
+                score = float(check_output([script,repo]).decode())
+            except:
+                pass
+            if score > 0:
+                break
+        outfile.write("%s,%s\n" % (account,str(score))); outfile.flush()
     outfile.close()
