@@ -19,8 +19,9 @@ def parse_args():
     parser.add_argument('-s', '--students', required=True, type=str, help="Students List (list of GitHub usernames)")
     parser.add_argument('-g', '--group', required=True, type=str, help="GitHub Group")
     parser.add_argument('-p', '--prefix', required=True, type=str, help="Repository Name Prefix")
-    parser.add_argument('-gs', '--script', required=True, type=str, help='Grading Script (usage must be ./<script> <repo> and must print just point number to STDOUT)')
-    parser.add_argument('-d', '--deadline', required=True, type=str, help='Deadline (MM/DD/YY HH:MM ±HHMM)')
+    parser.add_argument('-gs', '--script', required=True, type=str, help="Grading Script (usage must be ./<script> <repo> and must print just point number to STDOUT)")
+    parser.add_argument('-d', '--deadline', required=True, type=str, help="Deadline (MM/DD/YYYY HH:MM ±HHMM)")
+    parser.add_argument('-d1', '--date1', required=False, type=str, default='01/01/1900 00:00 +0000', help="Front Cutoff Date (grade assignments after this) (MM/DD/YYYY HH:MM ±HHMM)")
     parser.add_argument('-m', '--message', required=False, type=str, default=None, help="Submission Commit Message")
     parser.add_argument('-o', '--output', required=False, type=str, default='stdout', help="Output File")
     parser.add_argument('-v', '--verbose', action='store_true', help="Verbose")
@@ -31,7 +32,8 @@ def parse_args():
     students = [l.strip() for l in open(args.students)]
     group = "https://github.com/%s" % args.group
     script = abspath(args.script)
-    deadline = datetime.strptime(args.deadline, "%m/%d/%y %H:%M %z")
+    deadline = datetime.strptime(args.deadline, "%m/%d/%Y %H:%M %z")
+    date1 = datetime.strptime(args.date1, "%m/%d/%Y %H:%M %z")
     if args.output == 'stdout':
         outfile = stdout
     else:
@@ -41,16 +43,17 @@ def parse_args():
         print("GitHub Group URL: %s" % group, file=stderr)
         print("Repo Prefix: %s" % args.prefix, file=stderr)
         print("Grading Script: %s" % script, file=stderr)
+        print("Date 1: %s" % args.date1, file=stderr)
         print("Deadline: %s" % args.deadline, file=stderr)
         print("Submission Commit Message: %s" % args.message, file=stderr)
         print("Output File: %s" % args.output, file=stderr)
-    return students, group, args.prefix, script, deadline, args.message, outfile
+    return students, group, args.prefix, script, date1, deadline, args.message, outfile
 
 # main function: grade all repos
 if __name__ == "__main__":
     # set up
     orig_dir = getcwd()
-    students,group,prefix,script,deadline,message,outfile = parse_args()
+    students,group,prefix,script,date1,deadline,message,outfile = parse_args()
 
     # grade student repos
     if VERBOSE:
@@ -76,7 +79,7 @@ if __name__ == "__main__":
         commits = [(m,datetime.strptime(t, "%a %b %d %H:%M:%S %Y %z"),h) for m,t,h in commits]
         commits.sort(key=lambda x: x[1], reverse=True); submission_commit = None
         for m,t,h in commits:
-            if (message is None or message.upper() in m.upper()) and t < deadline:
+            if (message is None or message.upper() in m.upper()) and date1 <= t <= deadline:
                 submission_commit = h; break
         if submission_commit is None:
             if VERBOSE:
