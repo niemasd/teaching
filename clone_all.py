@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+'''
+Clone all submissions of a specified PA
+Niema Moshiri 2019
+'''
+import argparse
+from common import clone_repos
+from datetime import datetime
+from os import chdir,getcwd
+from os.path import abspath,isdir
+from subprocess import check_output,DEVNULL
+from sys import stderr,stdout
+
+def parse_args():
+    '''
+    Parses args and returns [student_list, github_group_url, repo_prefix, deadline, submission_message]
+    '''
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-s', '--students', required=True, type=str, help="Students List (list of GitHub usernames)")
+    parser.add_argument('-g', '--group', required=True, type=str, help="GitHub Group")
+    parser.add_argument('-p', '--prefix', required=True, type=str, help="Repository Name Prefix")
+    parser.add_argument('-d', '--deadline', required=True, type=str, help="Deadline (MM/DD/YYYY HH:MM ±HHMM)")
+    parser.add_argument('-d1', '--date1', required=False, type=str, default='01/01/1900 00:00 +0000', help="Front Cutoff Date (grade assignments after this) (MM/DD/YYYY HH:MM ±HHMM)")
+    parser.add_argument('-m', '--message', required=False, type=str, default=None, help="Submission Commit Message")
+    parser.add_argument('-v', '--verbose', action='store_true', help="Verbose")
+    args = parser.parse_args()
+    global VERBOSE; VERBOSE = args.verbose
+    students = [l.strip() for l in open(args.students)]
+    group = "https://github.com/%s" % args.group
+    deadline = datetime.strptime(args.deadline, "%m/%d/%Y %H:%M %z")
+    date1 = datetime.strptime(args.date1, "%m/%d/%Y %H:%M %z")
+    if VERBOSE:
+        print("Reading GitHub accounts from file: %s" % args.students, file=stderr)
+        print("GitHub Group URL: %s" % group, file=stderr)
+        print("Repo Prefix: %s" % args.prefix, file=stderr)
+        print("Date 1: %s" % args.date1, file=stderr)
+        print("Deadline: %s" % args.deadline, file=stderr)
+        print("Submission Commit Message: %s" % args.message, file=stderr)
+    return students, group, args.prefix, date1, deadline, args.message
+
+# main function: clone all repos
+if __name__ == "__main__":
+    orig_dir = getcwd()
+    students,group,prefix,date1,deadline,message = parse_args()
+    repos = ['%s-%s' % (prefix,student) for student in students]
+    repo_urls = ['%s/%s.git' % (group,repo) for repo in repos]
+    clone_repos(repo_urls, deadline=deadline, date1=date1, message=message, verbose=VERBOSE); chdir(orig_dir)

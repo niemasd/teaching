@@ -4,6 +4,7 @@ Grade all submissions of a specified PA
 Niema Moshiri 2019
 '''
 import argparse
+from common import clone_repos
 from datetime import datetime
 from os import chdir,getcwd
 from os.path import abspath,isdir
@@ -46,7 +47,7 @@ def parse_args():
         print("Date 1: %s" % args.date1, file=stderr)
         print("Deadline: %s" % args.deadline, file=stderr)
         print("Submission Commit Message: %s" % args.message, file=stderr)
-        print("Output File: %s" % args.output, file=stderr)
+        print("Output File: %s" % args.output, file=stderr); stderr.flush()
     return students, group, args.prefix, script, date1, deadline, args.message, outfile
 
 # main function: grade all repos
@@ -54,42 +55,17 @@ if __name__ == "__main__":
     # set up
     orig_dir = getcwd()
     students,group,prefix,script,date1,deadline,message,outfile = parse_args()
+    repos = ['%s-%s' % (prefix,student) for student in students]
+    repo_urls = ['%s/%s.git' % (group,repo) for repo in repos]
 
     # grade student repos
-    if VERBOSE:
-        print("Grading student repositories...", file=stderr)
-    for account in students:
-        # prep things
-        chdir(orig_dir)
-        repo = "%s-%s" % (prefix,account)
-        repo_url = "%s/%s.git" % (group,repo)
-
-        # try to clone
+    clone_repos(repo_urls, deadline=deadline, date1=date1, message=message, verbose=VERBOSE); chdir(orig_dir)
+    for i in range(len(students)):
+        student = students[i]; repo = repos[i]
         if not isdir(repo):
-            try:
-                check_output(['git','clone',repo_url], stderr=DEVNULL)
-            except:
-                if VERBOSE:
-                    print("Failed to clone: %s" % repo_url, file=stderr)
-                outfile.write("%s,0\n" % account); outfile.flush(); continue
-
-        # revert to last commit before deadline
-        chdir(repo)
-        commits = [line.strip().split('\t') for line in check_output(['git','log','--pretty="format:\%s\t\%ad\t\%H"'], stderr=DEVNULL).decode().replace('\\','').replace('"','').replace('format:','').splitlines()]
-        commits = [(m,datetime.strptime(t, "%a %b %d %H:%M:%S %Y %z"),h) for m,t,h in commits]
-        commits.sort(key=lambda x: x[1], reverse=True); submission_commit = None
-        for m,t,h in commits:
-            if (message is None or message.upper() in m.upper()) and date1 <= t <= deadline:
-                submission_commit = h; break
-        if submission_commit is None:
-            if VERBOSE:
-                print("No on-time submission for: %s" % account, file=stderr)
             outfile.write("%s,0\n" % account); outfile.flush(); continue
-        check_output(['git','reset','--hard',submission_commit]); chdir(orig_dir)
-
-        # grade submission
         if VERBOSE:
-            print("Grading submission for: %s" % account, file=stderr)
+            print("Grading submission for: %s" % student, file=stderr); stderr.flush()
         score = 0
         for _ in range(ITER):
             try:
