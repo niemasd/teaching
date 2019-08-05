@@ -3,7 +3,6 @@
 Clone all submissions of a specified PA
 Niema Moshiri 2019
 '''
-import argparse
 from common import clone_repos
 from datetime import datetime
 from os import chdir,getcwd
