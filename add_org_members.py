@@ -40,5 +40,8 @@ def parse_args():
 if __name__ == "__main__":
     gh, org_name, users, role = parse_args(); org = gh.get_organization(org_name)
     for u in users:
-        u_obj = gh.get_user(u)
+        try:
+            u_obj = gh.get_user(u)
+        except:
+            raise RuntimeError("Unable to get user: %s" % u)
         org.add_to_members(u_obj, role=role)
