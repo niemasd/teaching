@@ -20,7 +20,7 @@ def parse_args():
     parser.add_argument('-p', '--password', required=False, type=str, default=None, help="Administrator GitHub Password")
     parser.add_argument('-l', '--list', required=False, type=argparse.FileType('r', encoding='UTF-8'), default=None, help="List of GitHub Member Usernames (one per line)")
     parser.add_argument('-o', '--organization', required=False, type=str, default=None, help="GitHub Organization")
-    parser.add_argument('-r', '--role', required=False, type=str, default='member', help="Organization Role")
+    parser.add_argument('-r', '--role', required=False, type=str, default='member', help="Role (options: %s)" % ', '.join(sorted(VALID_ROLES)))
     args = parser.parse_args()
     if args.role not in VALID_ROLES:
         raise ValueError("Invalid organization role: %s\nValid options: %s" % (args.role, ', '.join(sorted(VALID_ROLES))))
