@@ -43,6 +43,8 @@ if __name__ == "__main__":
         sub_time = datetime.fromtimestamp(float(sub_time), timezone.utc)
         if user_id not in stepik_to_pid or status == 'wrong' or sub_time > deadline:
             continue
+        if 'code' not in reply and 'answer' not in reply:
+            continue
         pid = stepik_to_pid[user_id]
         passed[pid][step_id] = reply
 
