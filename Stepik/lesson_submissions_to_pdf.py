@@ -56,8 +56,13 @@ if __name__ == "__main__":
 
     # output student PDFs
     for pid in passed:
+        if len(passed[pid]) == 0:
+            continue
         pdf = FPDF(orientation='L')
         pdf.set_auto_page_break(True)
+        pdf.add_page()
+        pdf.set_font('Courier','B',16)
+        pdf.cell(60,10,"Code Report for PID %s"%pid,'C')
         for step_id in sorted(passed[pid].keys()):
             if 'code' not in passed[pid][step_id]:
                 continue
