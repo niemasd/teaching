@@ -61,6 +61,6 @@ if __name__ == "__main__":
         mkdir("%s/%s" % (args.outdir, email))
         for step_id in sorted(passed[email].keys()):
             if 'code' in passed[email][step_id]:
-                f = open("%s/%s/%d.java" % (args.outdir, email, step_id), 'w')
+                f = open("%s/%s/%d.txt" % (args.outdir, email, step_id), 'w')
                 f.write(passed[email][step_id]['code'])
                 f.close()
