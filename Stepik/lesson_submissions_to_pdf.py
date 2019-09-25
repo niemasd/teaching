@@ -25,7 +25,9 @@ if __name__ == "__main__":
     # parse roster
     pid_to_stepik = dict()
     for l in open(args.roster):
-        last,first,email,pid,stepik,iclicker,grade = [v.strip() for v in l.strip().split('\t')]
+        if l.startswith("Last Name\t"):
+            continue
+        last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')]
         assert pid not in pid_to_stepik, "Duplicate PID: %s" % pid
         pid_to_stepik[pid] = int(stepik)
     stepik_to_pid = {pid_to_stepik[pid]:pid for pid in pid_to_stepik}
@@ -54,15 +56,25 @@ if __name__ == "__main__":
         f.write('%s\t%s\n' % (pid,len(passed[pid])))
     f.close()
 
+    # output template PDF
+    pdf = FPDF(orientation='L')
+    pdf.set_auto_page_break(True)
+    pdf.add_page()
+    pdf.set_font('Courier','B',16)
+    pdf.cell(60,10,"Code Report for PID _________",'C')
+    pdf.ln(); pdf.ln()
+    pdf.cell(60,10,"Total Points: __",'C')
+    pdf.output('%s/TEMPLATE.pdf' % args.outdir)
+
     # output student PDFs
     for pid in passed:
-        if len(passed[pid]) == 0:
-            continue
         pdf = FPDF(orientation='L')
         pdf.set_auto_page_break(True)
         pdf.add_page()
         pdf.set_font('Courier','B',16)
         pdf.cell(60,10,"Code Report for PID %s"%pid,'C')
+        pdf.ln(); pdf.ln()
+        pdf.cell(60,10,"Total Points: %d"%len(passed[pid]),'C')
         for step_id in sorted(passed[pid].keys()):
             if 'code' not in passed[pid][step_id]:
                 continue
