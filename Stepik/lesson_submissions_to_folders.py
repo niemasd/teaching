@@ -7,6 +7,7 @@ from datetime import datetime,timezone
 from os.path import isdir
 from os import mkdir
 from xlrd import open_workbook
+EXT = {'java':'java', 'python':'py'}
 
 # main function: grade all repos
 if __name__ == "__main__":
@@ -16,7 +17,13 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--submissions', required=True, type=str, help="Stepik Lesson Submission Report (XLSX)")
     parser.add_argument('-d', '--deadline', required=True, help="Deadline (MM/DD/YYYY HH:MM ±HHMM)")
     parser.add_argument('-o', '--outdir', required=True, type=str, help="Output Directory")
+    parser.add_argument('-l', '--language', required=False, type=str, default=None, help="Language (%s)" % ', '.join(sorted(EXT.keys())))
     args = parser.parse_args()
+    if args.language is None:
+        file_ext = 'txt'
+    else:
+        assert args.language.lower() in EXT, "Invalid language: %s (valid: %s)" % (args.language, ', '.join(sorted(EXT.keys())))
+        file_ext = EXT[args.language.lower()]
     deadline = datetime.strptime(args.deadline, "%m/%d/%Y %H:%M %z")
     assert not isdir(args.outdir)
     mkdir(args.outdir)
@@ -61,6 +68,6 @@ if __name__ == "__main__":
         mkdir("%s/%s" % (args.outdir, email))
         for step_id in sorted(passed[email].keys()):
             if 'code' in passed[email][step_id]:
-                f = open("%s/%s/%d.txt" % (args.outdir, email, step_id), 'w')
+                f = open("%s/%s/%d.%s" % (args.outdir, email, step_id, file_ext), 'w')
                 f.write(passed[email][step_id]['code'])
                 f.close()
