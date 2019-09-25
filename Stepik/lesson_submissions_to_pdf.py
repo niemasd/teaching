@@ -56,16 +56,6 @@ if __name__ == "__main__":
         f.write('%s\t%s\n' % (pid,len(passed[pid])))
     f.close()
 
-    # output template PDF
-    pdf = FPDF(orientation='L')
-    pdf.set_auto_page_break(True)
-    pdf.add_page()
-    pdf.set_font('Courier','B',16)
-    pdf.cell(60,10,"Code Report for PID _________",'C')
-    pdf.ln(); pdf.ln()
-    pdf.cell(60,10,"Total Points: __",'C')
-    pdf.output('%s/TEMPLATE.pdf' % args.outdir)
-
     # output student PDFs
     for pid in passed:
         pdf = FPDF(orientation='L')
