@@ -67,25 +67,3 @@ if __name__ == "__main__":
         grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(len(passed[email]),args.point_total), extension='txt', submission=codepost_sub.id)
         point_delta = args.point_total - len(passed[email]) # codePost currently assumes subtractive points; update this when they integrate additive
         grade_comment = codepost.comment.create(text='points', startChar=0, endChar=0, startLine=0, endLine=0, file=grade_file.id, pointDelta=point_delta, rubricComment=None)
-
-'''
-    print(codepost_course)
-    exit()
-
-    # output student grades
-    f = open('%s/points.tsv' % args.outdir, 'w')
-    for email in passed:
-        f.write('%s\t%s\n' % (email,len(passed[email])))
-    f.close()
-
-    # output student code
-    for email in passed:
-        if len([step_id for step_id in passed[email] if 'code' in passed[email][step_id]]) == 0:
-            continue
-        mkdir("%s/%s" % (args.outdir, email))
-        for step_id in sorted(passed[email].keys()):
-            if 'code' in passed[email][step_id]:
-                f = open("%s/%s/%d.%s" % (args.outdir, email, step_id, file_ext), 'w')
-                f.write(passed[email][step_id]['code'])
-                f.close()
-'''
