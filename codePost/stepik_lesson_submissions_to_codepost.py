@@ -7,6 +7,7 @@ from datetime import datetime,timezone
 from xlrd import open_workbook
 import codepost
 EXT = {'java':'java', 'python':'py'}
+GRADER = "niemamoshiri@gmail.com" # all finalized assignments must have a "grader"
 
 # main function
 if __name__ == "__main__":
@@ -28,17 +29,20 @@ if __name__ == "__main__":
     deadline = datetime.strptime(args.deadline, "%m/%d/%Y %H:%M %z")
 
     # parse roster
+    print("Parsing roster: %s" % args.roster)
     email_to_stepik = dict()
     for l in open(args.roster):
         if l.startswith("Last Name\t"):
             continue
-        last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')]
+        last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
         assert email not in email_to_stepik, "Duplicate Email: %s" % email
         email_to_stepik[email] = int(stepik)
     stepik_to_email = {email_to_stepik[email]:email for email in email_to_stepik}
     passed = {email:dict() for email in email_to_stepik}
+    print("Loaded %d students from roster." % len(stepik_to_email))
 
     # parse submission report
+    print("Parsing Stepik lesson submission report: %s" % args.submissions)
     subs_by_email = {email:dict() for email in email_to_stepik}
     subs = open_workbook(args.submissions).sheet_by_index(0)
     for rowx in range(subs.nrows):
@@ -49,21 +53,29 @@ if __name__ == "__main__":
         sub_time = datetime.fromtimestamp(float(sub_time), timezone.utc)
         if user_id not in stepik_to_email or status == 'wrong' or sub_time > deadline:
             continue
-        if 'code' not in reply and 'answer' not in reply:
+        if 'text' in reply:
             continue
         email = stepik_to_email[user_id]
         passed[email][step_id] = reply
+    print("Loaded submissions.")
 
     # load codePost configuration and course
     codepost_config = codepost.util.config.read_config_file()
     #codepost_course = codepost.course.retrieve(id=args.course_id)
 
     # create codePost assignment and upload submissions
+    print("Creating new codePost assignment (%s)..." % args.assignment_name, end=' ')
     codepost_assignment = codepost.assignment.create(name=args.assignment_name, points=args.point_total, course=args.course_id)
-    for email in passed:
-        codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email])
+    print("done")
+    print("Uploading %d student submissions to codePost..." % len(passed))
+    for student_num,email in enumerate(passed.keys()):
+        print("Student %d of %d..." % (student_num+1, len(passed)), end='\r')
+        codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email], isFinalized=True, grader=GRADER)
         for step_id in sorted(passed[email].keys()):
+            if 'code' not in passed[email][step_id]:
+                continue
             code_file = codepost.file.create(name="%d.%s"%(step_id,file_ext), code=passed[email][step_id]['code'], extension=file_ext, submission=codepost_sub.id)
         grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(len(passed[email]),args.point_total), extension='txt', submission=codepost_sub.id)
         point_delta = args.point_total - len(passed[email]) # codePost currently assumes subtractive points; update this when they integrate additive
         grade_comment = codepost.comment.create(text='points', startChar=0, endChar=0, startLine=0, endLine=0, file=grade_file.id, pointDelta=point_delta, rubricComment=None)
+    print("Successfully uploaded %d student submissions" % len(passed))
