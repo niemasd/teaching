@@ -66,7 +66,6 @@ if __name__ == "__main__":
 
     # load codePost configuration and course
     codepost_config = codepost.util.config.read_config_file()
-    #codepost_course = codepost.course.retrieve(id=args.course_id)
 
     # create codePost assignment and upload submissions
     print("Creating new codePost assignment (%s)..." % args.assignment_name, end=' ')
