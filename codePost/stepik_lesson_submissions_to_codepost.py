@@ -36,8 +36,12 @@ if __name__ == "__main__":
             continue
         last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
         assert email not in email_to_stepik, "Duplicate Email: %s" % email
-        email_to_stepik[email] = int(stepik)
+        try:
+            email_to_stepik[email] = int(stepik)
+        except:
+            email_to_stepik[email] = -1 # dummy missing value
     stepik_to_email = {email_to_stepik[email]:email for email in email_to_stepik}
+    del stepik_to_email[-1] # delete dummy missing value
     passed = {email:dict() for email in email_to_stepik}
     print("Loaded %d students from roster." % len(stepik_to_email))
 
