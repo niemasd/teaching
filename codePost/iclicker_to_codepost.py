@@ -5,7 +5,6 @@ Niema Moshiri 2019
 '''
 import codepost
 GRADER = "niemamoshiri@gmail.com" # all finalized assignments must have a "grader"
-CODEPOST_ATTEMPTS = 10 # try calling codePost API this many times (in case of temporary server error)
 
 # main function
 if __name__ == "__main__":
@@ -55,37 +54,33 @@ if __name__ == "__main__":
 
     # create codePost assignment and upload submissions
     print("Creating new codePost assignment (%s)..." % args.assignment_name, end=' ')
-    for _ in range(CODEPOST_ATTEMPTS):
+    while True:
         try:
             codepost_assignment = codepost.assignment.create(name=args.assignment_name, points=1, course=args.course_id)
             break
         except Exception as e:
             pass
-        raise RuntimeError("Failed to create codePost assignment:\n%s" % str(e))
     print("done")
     print("Uploading %d student points to codePost..." % len(points))
     for student_num,email in enumerate(points.keys()):
         print("Student %d of %d..." % (student_num+1, len(points)), end='\r')
-        for _ in range(CODEPOST_ATTEMPTS):
+        while True:
             try:
                 codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email], isFinalized=True, grader=GRADER)
                 break
             except Exception as e:
                 pass
-            raise RuntimeError("Failed to create codePost submission:\n%s" % str(e))
-        for _ in range(CODEPOST_ATTEMPTS):
+        while True:
             try:
                 grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/1"%(points[email]), extension='txt', submission=codepost_sub.id)
                 break
             except Exception as e:
                 pass
-            raise RuntimeError("Failed to create grade file:\n%s" % str(e))
         point_delta = 1 - points[email] # codePost currently assumes subtractive points; update this when they integrate additive
-        for _ in range(CODEPOST_ATTEMPTS):
+        while True:
             try:
                 grade_comment = codepost.comment.create(text='points', startChar=0, endChar=0, startLine=0, endLine=0, file=grade_file.id, pointDelta=point_delta, rubricComment=None)
                 break
             except:
                 pass
-            raise RuntimeError("Failed to create comment with score:\n%s" % str(e))
     print("Successfully uploaded %d student points" % len(points))

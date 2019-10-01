@@ -69,17 +69,42 @@ if __name__ == "__main__":
 
     # create codePost assignment and upload submissions
     print("Creating new codePost assignment (%s)..." % args.assignment_name, end=' ')
-    codepost_assignment = codepost.assignment.create(name=args.assignment_name, points=args.point_total, course=args.course_id)
+    while True:
+        try:
+            codepost_assignment = codepost.assignment.create(name=args.assignment_name, points=args.point_total, course=args.course_id)
+            break
+        except Exception as e:
+            pass
     print("done")
     print("Uploading %d student submissions to codePost..." % len(passed))
     for student_num,email in enumerate(passed.keys()):
         print("Student %d of %d..." % (student_num+1, len(passed)), end='\r')
-        codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email], isFinalized=True, grader=GRADER)
+        while True:
+            try:
+                codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email], isFinalized=True, grader=GRADER)
+                break
+            except Exception as e:
+                pass
         for step_id in sorted(passed[email].keys()):
             if 'code' not in passed[email][step_id]:
                 continue
-            code_file = codepost.file.create(name="%d.%s"%(step_id,file_ext), code=passed[email][step_id]['code'], extension=file_ext, submission=codepost_sub.id)
-        grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(len(passed[email]),args.point_total), extension='txt', submission=codepost_sub.id)
+            while True:
+                try:
+                    code_file = codepost.file.create(name="%d.%s"%(step_id,file_ext), code=passed[email][step_id]['code'], extension=file_ext, submission=codepost_sub.id)
+                    break
+                except Exception as e:
+                    pass
+        while True:
+            try:
+                grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(len(passed[email]),args.point_total), extension='txt', submission=codepost_sub.id)
+                break
+            except Exception as e:
+                pass
         point_delta = args.point_total - len(passed[email]) # codePost currently assumes subtractive points; update this when they integrate additive
-        grade_comment = codepost.comment.create(text='points', startChar=0, endChar=0, startLine=0, endLine=0, file=grade_file.id, pointDelta=point_delta, rubricComment=None)
+        while True:
+            try:
+                grade_comment = codepost.comment.create(text='points', startChar=0, endChar=0, startLine=0, endLine=0, file=grade_file.id, pointDelta=point_delta, rubricComment=None)
+                break
+            except Exception as e:
+                pass
     print("Successfully uploaded %d student submissions" % len(passed))
