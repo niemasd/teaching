@@ -44,7 +44,7 @@ if __name__ == "__main__":
     if -1 in stepik_to_email:
         del stepik_to_email[-1] # delete dummy missing value
     passed = {email:dict() for email in email_to_stepik}
-    print("Loaded %d students from roster." % len(stepik_to_email))
+    print("Loaded %d students from roster." % len(passed))
 
     # parse submission report
     print("Parsing Stepik lesson submission report: %s" % args.submissions)
