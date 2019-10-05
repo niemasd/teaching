@@ -20,7 +20,7 @@ if __name__ == "__main__":
     print("Parsing roster: %s" % args.roster)
     email_to_iclicker = dict()
     for l in open(args.roster):
-        if l.startswith("Last Name\t"):
+        if len(l.strip()) == 0 or l.startswith("Last Name\t"):
             continue
         last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
         assert email == '' or email not in email_to_iclicker, "Duplicate Email: %s" % email
