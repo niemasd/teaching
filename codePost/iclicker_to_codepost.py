@@ -37,7 +37,7 @@ if __name__ == "__main__":
         if len(l.strip()) == 0 or l.startswith('Last Name'):
             continue
         try:
-            last,first,pid,iclicker,p = [v.strip().replace('"','').replace("'",'') for v in l.split(',')]
+            iclicker,p = [v.strip().replace('"','').replace("'",'') for v in l.split(',')[-2:]]
         except:
             assert False, "Failed to parse line:\n%s" % l
         if len(iclicker) != 0 and iclicker[0] == '#':
