@@ -13,7 +13,7 @@ EXT = {'java':'java', 'python':'py'}
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-r', '--roster', required=True, type=str, help="Roster (TSV) (Last, First, Email, PID, Stepik, iClicker, Grade ID)")
+    parser.add_argument('-r', '--roster', required=True, type=str, help="Roster (TSV) (Last, First, Email, PID, Stepik, iClicker)")
     parser.add_argument('-s', '--submissions', required=True, type=str, help="Stepik Lesson Submission Report (XLSX)")
     parser.add_argument('-d', '--deadline', required=True, help="Deadline (MM/DD/YYYY HH:MM ±HHMM)")
     parser.add_argument('-o', '--outdir', required=True, type=str, help="Output Directory")
