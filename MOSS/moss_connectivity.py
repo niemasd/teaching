@@ -23,7 +23,7 @@ if __name__ == "__main__":
         outfile = open(args.output,'w')
 
     # parse MOSS URLs
-    links = dict() # links[email1][email2] is the URL of the match between email1 and email2
+    links = dict() # links[email1][email2] is a list of URLs of matches between email1 and email2
     for url in infile:
         page = urlopen(url).read().decode()
         susp = [l.strip() for l in page.replace('\n','').replace('<TR>','\n').replace('</TABLE>','\n').splitlines() if '/match' in l]
@@ -33,7 +33,12 @@ if __name__ == "__main__":
             email2 = link.split('</A>')[1].split('HREF')[1].split('>')[1].split('/')[0].strip()
             if email1 not in links:
                 links[email1] = dict()
+            if email2 not in links[email1]:
+                links[email1][email2] = list()
             if email2 not in links:
                 links[email2] = dict()
-            links[email1][email2] = links[email2][email1] = moss_url
+            if email1 not in links[email2]:
+                links[email2][email1] = list()
+            links[email1][email2].append(moss_url)
+            links[email2][email1].append(moss_url)
     dump(links,outfile)
