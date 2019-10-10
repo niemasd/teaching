@@ -33,7 +33,7 @@ if __name__ == "__main__":
     for l in open(args.roster):
         if l.startswith("Last Name\t"):
             continue
-        last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')]
+        last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
         assert email not in email_to_stepik, "Duplicate Email: %s" % email
         email_to_stepik[email] = int(stepik)
     stepik_to_email = {email_to_stepik[email]:email for email in email_to_stepik}
