@@ -10,6 +10,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-i', '--input', required=False, type=str, default='stdin', help="MOSS Linkage File (JSON)")
     parser.add_argument('-o', '--output', required=False, type=str, default='stdout', help="Output File (TSV)")
+    parser.add_argument('-z', '--include_zeros', action='store_true', help="Include Pairs with 0 Matches")
     args = parser.parse_args()
     if args.input == 'stdin':
         from sys import stdin as infile
@@ -27,5 +28,5 @@ if __name__ == "__main__":
         for j in range(i+1, len(emails)):
             if emails[j] in links[emails[i]]:
                 outfile.write("%s\t%s\t%d\n" % (emails[i], emails[j], len(links[emails[i]][emails[j]])))
-            else:
+            elif args.include_zeros:
                 outfile.write("%s\t%s\t0\n" % (emails[i], emails[j]))
