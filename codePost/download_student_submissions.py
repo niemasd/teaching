@@ -74,3 +74,4 @@ if __name__ == "__main__":
                     pass
             outzip.writestr("%s/%s" % (sub_dir, curr_file.name.strip()), curr_file.code)
         print("Successfully downloaded submission %d of %d" % (sub_num+1, len(subs)), end='\r')
+    print("Successfully downloaded %d submissions" % len(subs))
