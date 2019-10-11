@@ -44,4 +44,5 @@ if __name__ == "__main__":
                     outzip.writestr("%s/%s" % (folder, left_url.split('/')[-1]), left_html)
                     outzip.writestr("%s/%s" % (folder, right_url.split('/')[-1]), right_html)
                     exit()
-            #print("Successfully downloaded student pair %d of %d" % (pair_num, num_pairs), end='\r'); pair_num += 1
+            print("Successfully downloaded student pair %d of %d" % (pair_num, num_pairs), end='\r'); pair_num += 1
+    print("Successfully downloaded %d student pairs" % num_pairs)
