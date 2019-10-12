@@ -37,11 +37,9 @@ if __name__ == "__main__":
                     right_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[3].split(' ')[0].replace('"',''))
                     folder = "%s,%s/%s" % (emails[i], emails[j], url.split('/')[-2])
                     top_html = urlopen(top_url).read().decode()
-                    left_html = urlopen(left_url).read().decode()
-                    right_html = urlopen(right_url).read().decode()
-                    outzip.writestr("%s/%s" % (folder, url.split('/')[-1]), main_html)
-                    outzip.writestr("%s/%s" % (folder, top_url.split('/')[-1]), top_html)
-                    outzip.writestr("%s/%s" % (folder, left_url.split('/')[-1]), left_html)
-                    outzip.writestr("%s/%s" % (folder, right_url.split('/')[-1]), right_html)
+                    left_html = urlopen(left_url).read().decode().split("<HR>")[1].split("</BODY>")[0]
+                    right_html = urlopen(right_url).read().decode().split("<HR>")[1].split("</BODY>")[0]
+                    merged_html = "<table width=100%% height=100%%><tr><td width=50%%>%s</td><td width=50%%>%s</td></tr></table>" % (left_html, right_html)
+                    outzip.writestr("%s.html" % folder, merged_html)
             print("Successfully downloaded student pair %d of %d" % (pair_num, num_pairs), end='\r'); pair_num += 1
     print("Successfully downloaded %d student pairs" % num_pairs)
