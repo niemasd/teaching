@@ -37,16 +37,21 @@ if __name__ == "__main__":
             if emails[j] in links[emails[i]]:
                 folder = "%s,%s" % (emails[i], emails[j])
                 for url in links[emails[i]][emails[j]]:
-                    url_base = '/'.join(url.rstrip('/').split('/')[:-1])
-                    main_html = urlopen(url).read().decode()
-                    top_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[1].split(' ')[0].replace('"',''))
-                    left_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[2].split(' ')[0].replace('"',''))
-                    right_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[3].split(' ')[0].replace('"',''))
-                    folder = "%s,%s/%s" % (emails[i], emails[j], url.split('/')[-2])
-                    top_html = urlopen(top_url).read().decode()
-                    left_html = urlopen(left_url).read().decode().split("<HR>")[1].split("</BODY>")[0]
-                    right_html = urlopen(right_url).read().decode().split("<HR>")[1].split("</BODY>")[0]
-                    merged_html = "<table width=100%% height=100%%><tr><td width=50%%>%s</td><td width=50%%>%s</td></tr></table>" % (left_html, right_html)
-                    outzip.writestr("%s.html" % folder, merged_html)
+                    while True:
+                        try:
+                            url_base = '/'.join(url.rstrip('/').split('/')[:-1])
+                            main_html = urlopen(url).read().decode()
+                            top_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[1].split(' ')[0].replace('"',''))
+                            left_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[2].split(' ')[0].replace('"',''))
+                            right_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[3].split(' ')[0].replace('"',''))
+                            folder = "%s,%s/%s" % (emails[i], emails[j], url.split('/')[-2])
+                            top_html = urlopen(top_url).read().decode()
+                            left_html = urlopen(left_url).read().decode().split("<HR>")[1].split("</BODY>")[0]
+                            right_html = urlopen(right_url).read().decode().split("<HR>")[1].split("</BODY>")[0]
+                            merged_html = "<table width=100%% height=100%%><tr><td width=50%%>%s</td><td width=50%%>%s</td></tr></table>" % (left_html, right_html)
+                            outzip.writestr("%s.html" % folder, merged_html)
+                            break # success, so break out of infinite loop
+                        except Exception as e:
+                            pass
             print("Successfully downloaded student pair %d of %d" % (pair_num, num_pairs), end='\r'); pair_num += 1
     print("Successfully downloaded %d student pairs" % num_pairs)
