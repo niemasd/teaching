@@ -4,7 +4,7 @@ if [ "$#" -ne 2 ] ; then
 fi
 nums=$(ls -l $1/*/*.java | rev | cut -d'/' -f1 | rev | sort | uniq)
 
-echo -n "Submitting code for $(echo $nums | wc -l) problems to MOSS... "
+echo -n "Submitting code for $(echo $nums | tr ' ' '\n' | wc -l) problems to MOSS... "
 for f in $nums ; do moss.pl -l $2 $1/*/$f > $f.log 2>/dev/null & done
 echo "done"
 

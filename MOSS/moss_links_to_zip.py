@@ -27,8 +27,9 @@ if __name__ == "__main__":
     num_pairs = int(len(emails)*(len(emails)-1)/2); pair_num = 1
 
     # download MOSS report summaries
-    urls = {'/'.join(u.split('/')[:-1]) for e1 in emails for e2 in emails[e1] for u in emails[e1][e2]}
-    print(urls); exit()
+    urls = {'/'.join(u.rstrip('/').split('/')[:-1]) for e1 in links for e2 in links[e1] for u in links[e1][e2]}
+    for url in urls:
+        outzip.writestr("_RESULTS/%s.html" % url.rstrip('/').split('/')[-1], urlopen(url).read().decode())
 
     # download MOSS match reports
     for i in range(len(emails)-1):
@@ -36,7 +37,7 @@ if __name__ == "__main__":
             if emails[j] in links[emails[i]]:
                 folder = "%s,%s" % (emails[i], emails[j])
                 for url in links[emails[i]][emails[j]]:
-                    url_base = '/'.join(url.split('/')[:-1])
+                    url_base = '/'.join(url.rstrip('/').split('/')[:-1])
                     main_html = urlopen(url).read().decode()
                     top_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[1].split(' ')[0].replace('"',''))
                     left_url = '%s/%s' % (url_base, main_html.split('<FRAME SRC=')[2].split(' ')[0].replace('"',''))
