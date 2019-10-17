@@ -20,11 +20,17 @@ if __name__ == "__main__":
     if not args.output.lower().endswith('.zip'):
         raise ValueError("Output file must be zip")
 
-    # download MOSS match reports
+    # load input data and prep
     links = load(infile)
     emails = sorted(links.keys())
     outzip = ZipFile(args.output, mode='w', compression=ZIP_DEFLATED)
     num_pairs = int(len(emails)*(len(emails)-1)/2); pair_num = 1
+
+    # download MOSS report summaries
+    urls = {'/'.join(u.split('/')[:-1]) for e1 in emails for e2 in emails[e1] for u in emails[e1][e2]}
+    print(urls); exit()
+
+    # download MOSS match reports
     for i in range(len(emails)-1):
         for j in range(i+1, len(emails)):
             if emails[j] in links[emails[i]]:
