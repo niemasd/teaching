@@ -34,7 +34,10 @@ if __name__ == "__main__":
             cols = row.findAll('td')
             if len(cols) != 3:
                 continue
-            moss_url = cols[0].find_all('a', href=True)[0]['href']
+            try:
+                moss_url = cols[0].find_all('a', href=True)[0]['href']
+            except:
+                stderr.write("Failed to parse row: %s" % row); continue
             email1 = cols[0].find_all('a', href=True)[0].text.split('/')[1]
             email2 = cols[1].find_all('a', href=True)[0].text.split('/')[1]
             if email1 not in links:
