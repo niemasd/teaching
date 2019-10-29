@@ -19,8 +19,10 @@ if __name__ == "__main__":
     parser.add_argument('-c', '--course_id', required=True, type=int, help="codePost Course ID")
     parser.add_argument('-a', '--assignment_name', required=True, type=str, help="codePost Assignment Name")
     parser.add_argument('-p', '--point_total', required=True, type=int, help="Total Possible Number of Points")
+    parser.add_argument('-pc', '--point_cap', required=False, type=int, default=float('inf'), help="Point Cap")
     parser.add_argument('-l', '--language', required=False, type=str, default=None, help="Language (%s)" % ', '.join(sorted(EXT.keys())))
     args = parser.parse_args()
+    assert args.point_cap >= 0, "Point cap cannot be negative"
     if args.language is None:
         file_ext = 'txt'
     else:
@@ -79,6 +81,7 @@ if __name__ == "__main__":
     print("Uploading %d student submissions to codePost..." % len(passed))
     for student_num,email in enumerate(passed.keys()):
         print("Student %d of %d..." % (student_num+1, len(passed)), end='\r')
+        student_points = min(len(passed[email]), args.point_cap)
         while True:
             try:
                 codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email], isFinalized=True, grader=GRADER)
@@ -96,11 +99,11 @@ if __name__ == "__main__":
                     pass
         while True:
             try:
-                grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(len(passed[email]),args.point_total), extension='txt', submission=codepost_sub.id)
+                grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(student_points,args.point_total), extension='txt', submission=codepost_sub.id)
                 break
             except Exception as e:
                 pass
-        point_delta = args.point_total - len(passed[email]) # codePost currently assumes subtractive points; update this when they integrate additive
+        point_delta = args.point_total - student_points # codePost currently assumes subtractive points; update this when they integrate additive
         while True:
             try:
                 grade_comment = codepost.comment.create(text='points', startChar=0, endChar=0, startLine=0, endLine=0, file=grade_file.id, pointDelta=point_delta, rubricComment=None)
