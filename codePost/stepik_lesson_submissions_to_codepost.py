@@ -56,7 +56,11 @@ if __name__ == "__main__":
         sub_id,step_id,user_id,last,first,attempt_time,sub_time,status,dataset,clue,reply,reply_clear,hint = subs.row_values(rowx)
         if sub_id == "submission_id":
             continue # header line
-        step_id = int(float(step_id)); user_id = int(float(user_id)); reply = eval(reply)
+        step_id = int(float(step_id)); user_id = int(float(user_id))
+        try:
+            reply = eval(reply)
+        except:
+            pass # sometimes weird strings
         sub_time = datetime.fromtimestamp(float(sub_time), timezone.utc)
         if user_id not in stepik_to_email or status == 'wrong' or sub_time > deadline:
             continue
