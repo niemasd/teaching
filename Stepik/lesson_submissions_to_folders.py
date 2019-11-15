@@ -3,7 +3,9 @@
 Given a Stepik lesson submission report, for each student, output a folder with code files (uploadable to codePost)
 Niema Moshiri 2019
 '''
+from csv import reader
 from datetime import datetime,timezone
+from io import StringIO
 from os.path import isdir
 from os import mkdir
 from xlrd import open_workbook
@@ -41,9 +43,12 @@ if __name__ == "__main__":
 
     # parse submission report
     subs_by_email = {email:dict() for email in email_to_stepik}
-    subs = open_workbook(args.submissions).sheet_by_index(0)
-    for rowx in range(subs.nrows):
-        sub_id,step_id,user_id,last,first,attempt_time,sub_time,status,dataset,clue,reply,reply_clear,hint = subs.row_values(rowx)
+    if args.submissions.split('.')[-1].lower() == 'csv':
+        subs_lines = [line for line in reader(StringIO(open(args.submissions).read().replace('\x00','')))]
+    else:
+        subs = open_workbook(args.submissions).sheet_by_index(0)
+        subs_lines = [subs.row_values(rowx) for rowx in range(subs.nrows)]
+    for sub_id,step_id,user_id,last,first,attempt_time,sub_time,status,dataset,clue,reply,reply_clear,hint in subs_lines:
         if sub_id == "submission_id":
             continue # header line
         step_id = int(float(step_id)); user_id = int(float(user_id)); reply = eval(reply)
