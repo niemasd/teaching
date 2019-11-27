@@ -69,7 +69,7 @@ if __name__ == "__main__":
         sub_time = datetime.fromtimestamp(float(sub_time), timezone.utc)
         if user_id not in stepik_to_email or status == 'wrong' or sub_time > deadline:
             continue
-        if 'text' in reply and '<p>' in reply:
+        if 'text' in reply and '<p>' in str(reply):
             continue
         email = stepik_to_email[user_id]
         passed[email][step_id] = reply
