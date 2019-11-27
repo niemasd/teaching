@@ -27,7 +27,7 @@ if __name__ == "__main__":
         e,p = [v.strip() for v in l.strip().split(',')]
         if len(p) == 0:
             p = '0'
-        points[e] = int(p)
+        points[e] = str(float(p)).rstrip('0').rstrip('.')
 
     # parse roster and output
     for l in open(args.roster):
@@ -35,6 +35,6 @@ if __name__ == "__main__":
             continue
         last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
         if email not in points:
-            points[email] = 0
+            points[email] = '0'
         outfile.write('\t'.join([v.strip() for v in l.strip().split('\t')][:6]))
-        outfile.write('\t%d\n' % points[email])
+        outfile.write('\t%s\n' % points[email])
