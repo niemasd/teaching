@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 '''
 Given iClicker participation points, create a codePost assignment with points (1 or 0) via codePost API
 Niema Moshiri 2019

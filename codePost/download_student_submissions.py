@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 '''
 Download all student submissions for a given codePost assignment
 Niema Moshiri 2019

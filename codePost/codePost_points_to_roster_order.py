@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 '''
 Given a codePost grade/score report, reorder the points to be in the same order as the given roster file
 Niema Moshiri 2019

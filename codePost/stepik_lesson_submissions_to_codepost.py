@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 '''
 Given a Stepik lesson submission report, create a codePost assignment with submissions and scores via codePost API
 Niema Moshiri 2019
