@@ -33,8 +33,7 @@ if __name__ == "__main__":
     for l in open(args.roster):
         if l.startswith("Last Name\t"):
             continue
-        last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
+        email = l.split('\t')[2].strip()
         if email not in points:
             points[email] = '0'
-        outfile.write('\t'.join([v.strip() for v in l.strip().split('\t')][:6]))
-        outfile.write('\t%s\n' % points[email])
+        outfile.write("%s\t%s\n" % (email, points[email]))
