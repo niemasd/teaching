@@ -89,7 +89,7 @@ if __name__ == "__main__":
     print("done")
     print("Uploading %d student submissions to codePost..." % len(passed))
     for student_num,email in enumerate(passed.keys()):
-        print("Student %d of %d..." % (student_num+1, len(passed)), end='\r')
+        print("Student %d of %d (%s)..." % (student_num+1, len(passed), email), end='\r')
         student_points = min(len(passed[email]), args.point_cap)
         while True:
             try:

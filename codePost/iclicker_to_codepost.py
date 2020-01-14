@@ -63,7 +63,7 @@ if __name__ == "__main__":
     print("done")
     print("Uploading %d student points to codePost..." % len(points))
     for student_num,email in enumerate(points.keys()):
-        print("Student %d of %d..." % (student_num+1, len(points)), end='\r')
+        print("Student %d of %d (%s)..." % (student_num+1, len(points), email), end='\r')
         while True:
             try:
                 codepost_sub = codepost.submission.create(assignment=codepost_assignment.id, students=[email], isFinalized=True, grader=GRADER)
