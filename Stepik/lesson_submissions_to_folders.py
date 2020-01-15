@@ -37,7 +37,10 @@ if __name__ == "__main__":
             continue
         last,first,email,pid,stepik,iclicker = [v.strip() for v in l.strip().split('\t')][:6]
         assert email not in email_to_stepik, "Duplicate Email: %s" % email
-        email_to_stepik[email] = int(stepik)
+        if len(stepik.strip()) == 0:
+            email_to_stepik[email] = None
+        else:
+            email_to_stepik[email] = int(stepik)
     stepik_to_email = {email_to_stepik[email]:email for email in email_to_stepik}
     passed = {email:dict() for email in email_to_stepik}
 
