@@ -6,10 +6,15 @@ Niema Moshiri 2019
 from csv import reader
 from datetime import datetime,timezone
 from io import StringIO
+from os.path import realpath
+from subprocess import PIPE,run
+from tempfile import NamedTemporaryFile
 from xlrd import open_workbook
 import codepost
 EXT = {'java':'java', 'python':'py'}
 GRADER = "niemamoshiri@gmail.com" # all finalized assignments must have a "grader"
+SCRIPT_PATH = '/'.join(realpath(__file__).split('/')[:-1])
+CHECKSTYLE_PATH = "%s/../checkstyle" % SCRIPT_PATH
 
 # main function
 if __name__ == "__main__":
@@ -23,6 +28,7 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--point_total', required=True, type=int, help="Total Possible Number of Points")
     parser.add_argument('-pc', '--point_cap', required=False, type=int, default=float('inf'), help="Point Cap")
     parser.add_argument('-l', '--language', required=False, type=str, default=None, help="Language (%s)" % ', '.join(sorted(EXT.keys())))
+    parser.add_argument('-nc', '--no_checkstyle', action='store_true', help="Do not run checkstyle")
     args = parser.parse_args()
     assert args.point_cap >= 0, "Point cap cannot be negative"
     if args.language is None:
@@ -100,12 +106,23 @@ if __name__ == "__main__":
         for step_id in sorted(passed[email].keys()):
             if 'code' not in passed[email][step_id]:
                 continue
+            curr_code = passed[email][step_id]['code']
             while True:
                 try:
-                    code_file = codepost.file.create(name="%d.%s"%(step_id,file_ext), code=passed[email][step_id]['code'], extension=file_ext, submission=codepost_sub.id)
+                    code_file = codepost.file.create(name="%d.%s"%(step_id,file_ext), code=curr_code, extension=file_ext, submission=codepost_sub.id)
                     break
                 except Exception as e:
                     pass
+            if not args.no_checkstyle:
+                tmpfile = NamedTemporaryFile(mode='w'); tmpfile.write(curr_code); tmpfile.flush()
+                p = run(['java', '-jar', '%s/checkstyle.jar'%CHECKSTYLE_PATH, '-c', '%s/style_checks.xml'%CHECKSTYLE_PATH, tmpfile.name], stdout=PIPE, stderr=PIPE)
+                curr_comments = [l.strip().split(': ')[-1].split('[')[0].strip() for l in p.stdout.decode().strip().splitlines() if l.strip()[-1] == ']']
+                while True:
+                    try:
+                        curr_comment = codepost.comment.create(text='\n\n'.join(curr_comments), startChar=0, endChar=0, startLine=0, endLine=0, file=code_file.id, pointDelta=0, rubricComment=None)
+                        break
+                    except Exception as e:
+                        pass
         while True:
             try:
                 grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(student_points,args.point_total), extension='txt', submission=codepost_sub.id)
