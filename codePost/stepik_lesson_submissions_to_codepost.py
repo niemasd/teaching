@@ -106,7 +106,7 @@ if __name__ == "__main__":
         for step_id in sorted(passed[email].keys()):
             if 'code' not in passed[email][step_id]:
                 continue
-            curr_code = passed[email][step_id]['code']
+            curr_code = passed[email][step_id]['code'].strip()
             while True:
                 try:
                     code_file = codepost.file.create(name="%d.%s"%(step_id,file_ext), code=curr_code, extension=file_ext, submission=codepost_sub.id)
@@ -116,7 +116,7 @@ if __name__ == "__main__":
             if not args.no_checkstyle:
                 tmpfile = NamedTemporaryFile(mode='w'); tmpfile.write(curr_code); tmpfile.flush()
                 p = run(['java', '-jar', '%s/checkstyle.jar'%CHECKSTYLE_PATH, '-c', '%s/style_checks.xml'%CHECKSTYLE_PATH, tmpfile.name], stdout=PIPE, stderr=PIPE)
-                curr_comments = [l.strip().split(': ')[-1].split('[')[0].strip() for l in p.stdout.decode().strip().splitlines() if l.strip()[-1] == ']']
+                curr_comments = {l.strip().split(': ')[-1].split('[')[0].split('(')[0].strip() for l in p.stdout.decode().strip().splitlines() if l.strip()[-1] == ']'}
                 if len(curr_comments) != 0:
                     while True:
                         try:
