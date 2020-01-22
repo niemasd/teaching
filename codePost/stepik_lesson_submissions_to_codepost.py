@@ -117,12 +117,13 @@ if __name__ == "__main__":
                 tmpfile = NamedTemporaryFile(mode='w'); tmpfile.write(curr_code); tmpfile.flush()
                 p = run(['java', '-jar', '%s/checkstyle.jar'%CHECKSTYLE_PATH, '-c', '%s/style_checks.xml'%CHECKSTYLE_PATH, tmpfile.name], stdout=PIPE, stderr=PIPE)
                 curr_comments = [l.strip().split(': ')[-1].split('[')[0].strip() for l in p.stdout.decode().strip().splitlines() if l.strip()[-1] == ']']
-                while True:
-                    try:
-                        curr_comment = codepost.comment.create(text='\n\n'.join(curr_comments), startChar=0, endChar=0, startLine=0, endLine=0, file=code_file.id, pointDelta=0, rubricComment=None)
-                        break
-                    except Exception as e:
-                        pass
+                if len(curr_comments) != 0:
+                    while True:
+                        try:
+                            curr_comment = codepost.comment.create(text='\n\n'.join(curr_comments), startChar=0, endChar=0, startLine=0, endLine=0, file=code_file.id, pointDelta=0, rubricComment=None)
+                            break
+                        except Exception as e:
+                            pass
         while True:
             try:
                 grade_file = codepost.file.create(name="grade.txt", code="Grade: %d/%d"%(student_points,args.point_total), extension='txt', submission=codepost_sub.id)
