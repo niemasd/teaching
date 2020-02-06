@@ -4,9 +4,6 @@
           "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
     <module name="com.puppycrawl.tools.checkstyle.TreeWalker">
-        <!-- https://checkstyle.sourceforge.io/config_javadoc.html#JavadocType -->
-        <module name="JavadocType"/>
-
         <!-- https://checkstyle.sourceforge.io/config_javadoc.html#JavadocMethod -->
         <module name="JavadocMethod"/>
 
@@ -48,5 +45,7 @@
     </module>
 
     <!-- https://checkstyle.sourceforge.io/config_sizes.html#LineLength -->
-    <module name="LineLength"/>
+    <module name="LineLength">
+        <property name="max" value="140"/>
+    </module>
 </module>
