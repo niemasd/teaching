@@ -29,6 +29,7 @@ if __name__ == "__main__":
     parser.add_argument('-pc', '--point_cap', required=False, type=int, default=float('inf'), help="Point Cap")
     parser.add_argument('-l', '--language', required=False, type=str, default=None, help="Language (%s)" % ', '.join(sorted(EXT.keys())))
     parser.add_argument('-nc', '--no_checkstyle', action='store_true', help="Do not run checkstyle")
+    parser.add_argument('-u', '--update', action='store_true', help="Update assignment (instead of creating a new one)")
     args = parser.parse_args()
     assert args.point_cap >= 0, "Point cap cannot be negative"
     if args.language is None:
@@ -84,15 +85,43 @@ if __name__ == "__main__":
     # load codePost configuration and course
     codepost_config = codepost.util.config.read_config_file()
 
-    # create codePost assignment and upload submissions
-    print("Creating new codePost assignment (%s)..." % args.assignment_name, end=' ')
-    while True:
-        try:
-            codepost_assignment = codepost.assignment.create(name=args.assignment_name, points=args.point_total, course=args.course_id)
-            break
-        except Exception as e:
-            pass
-    print("done")
+    # update codePost assignment,
+    if args.update:
+        print("Loading codePost course...", end=' ', flush=True)
+        while True:
+            try:
+                course = codepost.course.retrieve(id=args.course_id)
+                break
+            except:
+                pass
+        print("done")
+        print("Finding assignment (%s)..." % args.assignment_name, end=' ', flush=True)
+        codepost_assignment = None
+        for a in course.assignments:
+            while True:
+                try:
+                    curr = codepost.assignment.retrieve(id=a.id)
+                    break
+                except:
+                    pass
+            if curr.name.strip() == args.assignment_name.strip():
+                codepost_assignment = curr; break
+        if codepost_assignment is None:
+            raise ValueError("Assignment not found: %s" % args.assignment_name)
+        print("done")
+
+    # or create codePost assignment
+    else:
+        print("Creating new codePost assignment (%s)..." % args.assignment_name, end=' ')
+        while True:
+            try:
+                codepost_assignment = codepost.assignment.create(name=args.assignment_name, points=args.point_total, course=args.course_id)
+                break
+            except Exception as e:
+                pass
+        print("done")
+
+    # upload submissions
     print("Uploading %d student submissions to codePost..." % len(passed))
     for student_num,email in enumerate(passed.keys()):
         print("Student %d of %d (%s)..." % (student_num+1, len(passed), email), end='\r')
