@@ -35,12 +35,12 @@ if __name__ == "__main__":
     print("done")
 
     # get codePost assignment
-    print("Finding assignment (%s)..." % args.assignment_name, end=' ')
+    print("Finding assignment (%s)..." % args.assignment_name, end=' ', flush=True)
     assignment = None
-    for assignment_id in course.assignments:
+    for a in course.assignments:
         while True:
             try:
-                curr = codepost.assignment.retrieve(id=assignment_id)
+                curr = codepost.assignment.retrieve(id=a.id)
                 break
             except:
                 pass
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     print("done")
 
     # get submissions list
-    print("Getting list of submissions...", end=' ')
+    print("Getting list of submissions...", end=' ', flush=True)
     while True:
         try:
             subs = codepost.assignment.list_submissions(id=assignment.id)
@@ -61,17 +61,16 @@ if __name__ == "__main__":
     print("done")
 
     # download submissions
-    print("Downloading submissions...")
     outzip = ZipFile(args.output, mode='w', compression=ZIP_DEFLATED)
     for sub_num,sub in enumerate(subs):
+        print("Downloading submission %d of %d..." % (sub_num+1,len(subs)), end='\r', flush=True)
         sub_dir = ','.join(sub.students)
-        for file_id in sub.files:
+        for f in sub.files:
             while True:
                 try:
-                    curr_file = codepost.file.retrieve(id=file_id)
+                    curr_file = codepost.file.retrieve(id=f.id)
                     break
                 except:
                     pass
             outzip.writestr("%s/%s" % (sub_dir, curr_file.name.strip()), curr_file.code)
-        print("Successfully downloaded submission %d of %d" % (sub_num+1, len(subs)), end='\r')
     print("Successfully downloaded %d submissions" % len(subs))
