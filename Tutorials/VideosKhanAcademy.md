@@ -7,6 +7,8 @@ In my videos, I draw and write things as I talk. To help me draw more smoothly/c
 Note that I purchased a Wacom One pen display because my laptop does not have a touchscreen and because I don't own an Android/iPad tablet. If you already own a device that has a touchscreen with which you can use a pen, that would work as well.
 
 # Software
+Note that every piece of software I use is free.
+
 ## Drawing
 I use [SmoothDraw](http://www.smoothdraw.com/sd) to actually do the drawing. It is similar in function to Microsoft Paint, but it integrates more nicely with tablets/pens, and the drawing looks more smooth. It seems as though this is what Khan Academy uses.
 
@@ -36,6 +38,16 @@ The following color palette is for a white background:
 For convenience during recording, I have these colors saved in my SmoothDraw color palette.
 
 ## Recording
-To actually record the videos, I use [Open Broadcaster Software (OBS)](http://obsproject.com/). I open SmoothDraw on my tablet screen, and in OBS, I set a video source to be a window that is contained within the drawing area of SmoothDraw:
+To actually record the videos, I use [Open Broadcaster Software (OBS)](http://obsproject.com/). I open SmoothDraw on my tablet screen, and in OBS, I set a video source to be a window that is contained within the drawing area of SmoothDraw. I believe I used [this Reddit post](https://www.reddit.com/r/obs/comments/550rp8/how_to_record_a_certain_part_of_screen/) (or similar) to figure out how to select a specific part of the screen in OBS (in my case, only the drawing area of SmoothDraw). The result looks as follows:
 
-TODO ADD SCREENSHOT
+[<img src="figs/VideosKhanAcademy/OBS.png">](figs/VideosKhanAcademy/OBS.png)
+
+## Editing
+To edit the recorded videos, I use the free version of [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve/). I mainly use it to do the following tasks:
+
+* I give myself pauses at the beginning and end of videos as well as in the middle if I need to collect my thoughts, so I use Resolve to cut out these pauses
+* Sometimes, if I'm drawing something without talking, I will speed up the drawing portion to 2x speed to make the video a bit shorter and avoid awkwardly long silence
+* I try to record each individual component of a "full video" as a separate recording, so I use Resolve to concatenate the individual pieces of a "full video" together
+    * Note that I aim to have the complete "full videos" to be between 5 and 15 minutes in length (usually around 10): I try to have them be short, self-contained videos about a specific idea
+    * Each of these shorter "components" is usually 2-3 minutes long
+* I export my videos as MP4 files with the H264 codec at 1080p resolution
