@@ -6,6 +6,9 @@ In my videos, I draw and write things as I talk. To help me draw more smoothly/c
 
 Note that I purchased a Wacom One pen display because my laptop does not have a touchscreen and because I don't own an Android/iPad tablet. If you already own a device that has a touchscreen with which you can use a pen, that would work as well.
 
+## Hardware: Microphone
+In my videos, I unfortunately am using the microphone built into my headset, and the audio doesn't sound the best. It may be worth investing in a decent microphone. People have recommended the [Blue Snowball](https://www.bluedesigns.com/products/snowball/) and the [Samson Meteor](http://www.samsontech.com/samson/products/microphones/usb-microphones/meteormic/) as good microphones that are decently-priced.
+
 ## Software
 Note that every piece of software I use is free.
 
