@@ -72,7 +72,9 @@ if __name__ == "__main__":
             pass
         else:
             if sis_login_ID in quiz_score:
-                out_csv.writerow([student, ID, sis_user_ID, sis_login_ID, section, str(quiz_score[sis_login_ID])])
+                curr_score = quiz_score[sis_login_ID]
             else:
-                stderr.write("CANVAS STUDENT NOT FOUND IN ED: %s\n" % sis_login_ID)
+                stderr.write("CANVAS STUDENT NOT FOUND IN ED: %s\n" % sis_login_ID); curr_score = 0
+            out_csv.writerow([student, ID, sis_user_ID, sis_login_ID, section, str(curr_score)])
+
     args.output.close()
