@@ -63,7 +63,9 @@ if __name__ == "__main__":
             if col >= len(row):
                 raise ValueError("Ed column out-of-bounds: %d" % col)
             score += int(row[col])
-        quiz_score[email.split('@')[0]] = score # use usernames as keys instead of emails
+        uname = email.split('@')[0] # use usernames as keys instead of emails
+        if uname not in quiz_score or score > quiz_score[uname]:
+            quiz_score[uname] = score
 
     # parse exported Canvas gradebook
     out_csv = writer(args.output)
@@ -73,7 +75,7 @@ if __name__ == "__main__":
         student = row[0].strip()
         ID = row[1].strip()
         sis_user_ID = row[2].strip()
-        sis_login_ID = row[3].strip()
+        sis_login_ID = row[3].strip().split('@')[0]
         section = row[4].strip()
         assignment = row[args.canvas_column].strip()
         if student == 'Student' and ID == 'ID' and sis_user_ID == 'SIS User ID' and sis_login_ID == 'SIS Login ID' and section == 'Section':
@@ -83,8 +85,8 @@ if __name__ == "__main__":
         else:
             if sis_login_ID in quiz_score:
                 curr_score = quiz_score[sis_login_ID]
-            else if sis_login_ID in canvas2ed and canvas2ed[sis_login_ID] in quiz_score:
-                curr_score = quiz_score[canvas2ed[sis_login_ID]]
+            elif sis_login_ID in canvas2ed and canvas2ed[sis_login_ID].split('@')[0] in quiz_score:
+                curr_score = quiz_score[canvas2ed[sis_login_ID].split('@')[0]]
             else:
                 stderr.write("CANVAS STUDENT NOT FOUND IN ED: %s\n" % sis_login_ID); curr_score = 0
             out_csv.writerow([student, ID, sis_user_ID, sis_login_ID, section, str(curr_score)])
