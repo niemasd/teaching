@@ -30,3 +30,6 @@ O(1) insertion into an unsorted Linked List is only possible if we know in advan
 
 ## [Implementing the Set and Map ADTs — 4:49](https://youtu.be/BbHf6N-DJRo?t=289)
 O(1) amortized insertion into an unsorted Array List is only possible if we know in advance that we will not receive duplicate items. If we may receive duplicate items, we need to check for duplicates in insert to avoid unbounded time complexity in find and remove, which would make it O(*n*).
+
+## [MWT Space Complexity — 8:37](https://youtu.be/e-Fie3g62H8?t=517)
+|*∑*|<sup>*k*+1</sup> is the number of ***nodes*** in the MWT, not the number of pointers. Each node has |*∑*| pointers, so the total number of ***pointers*** would be |*∑*|<sup>*k*+2</sup>
