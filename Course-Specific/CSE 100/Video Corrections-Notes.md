@@ -21,3 +21,6 @@ To explain why *N<sub>h</sub>* is greater than 2<sup>*h*/2</sup>:
   * Therefore, 2<sup>*h*/2</sup> is the maximum number of nodes in a binary tree with height <sup>*h*</sup>/<sub>2</sub>
 * 2 times the minimum number of nodes in an AVL tree with height *h*-2 (i.e., 2*N*<sub>*h*-2</sub>) is larger than the maximum number of nodes in a (perfectly-balanced) binary tree with height <sup>*h*</sup>/<sub>2</sub> (which is 2<sup>*h*/2</sup>) (this may not be obvious, but try drawing it out with many examples)
 * Therefore, if *N<sub>h</sub>* is greater than 2*N*<sub>*h*-2</sub> and 2*N*<sub>*h*-2</sub> is greater than 2<sup>*h*/2</sup>, then *N<sub>h</sub>* is greater than 2<sup>*h*/2</sup>
+
+## [Proof of Red-Black Tree Worst-Case Time Complexity — 11:13](https://youtu.be/aRkE7DmVbCE?t=673)
+Should be "equal to", not "greater than or equal to".
