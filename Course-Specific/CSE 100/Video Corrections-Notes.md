@@ -9,3 +9,6 @@ Should be "And this `Student` object is called `s1`", not "And this [`string`](h
 
 ## [AVL Rotations — 10:46](https://youtu.be/xzmLuS0ZJmA?t=646)
 I accidentally said "right child of 8" and "left child of 5," but I meant to say "left child of 8" and "right child of 5" (which is what I correctly drew in the tree).
+
+## [Proof of AVL Tree Worst-Case Time Complexity — 10:20](https://youtu.be/hUzRX1LzGXI?t=620)
+I meant *h*/2 (what I wrote), but I accidentally said "h minus 2" instead of "h over 2".
