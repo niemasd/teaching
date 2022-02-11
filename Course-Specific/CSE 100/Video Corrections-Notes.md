@@ -24,3 +24,9 @@ To explain why *N<sub>h</sub>* is greater than 2<sup>*h*/2</sup>:
 
 ## [Proof of Red-Black Tree Worst-Case Time Complexity — 11:13](https://youtu.be/aRkE7DmVbCE?t=673)
 Should be "equal to", not "greater than or equal to".
+
+## [Implementing the Set and Map ADTs — 1:32](https://youtu.be/BbHf6N-DJRo?t=92)
+O(1) insertion into an unsorted Linked List is only possible if we know in advance that we will not receive duplicate items. If we may receive duplicate items, we need to check for duplicates in insert to avoid unbounded time complexity in find and remove, which would make it O(*n*).
+
+## [Implementing the Set and Map ADTs — 4:49](https://youtu.be/BbHf6N-DJRo?t=289)
+O(1) amortized insertion into an unsorted Array List is only possible if we know in advance that we will not receive duplicate items. If we may receive duplicate items, we need to check for duplicates in insert to avoid unbounded time complexity in find and remove, which would make it O(*n*).
