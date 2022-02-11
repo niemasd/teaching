@@ -36,3 +36,8 @@ O(1) amortized insertion into an unsorted Array List is only possible if we know
 
 ## [TST Find — 2:43](https://youtu.be/mAOnwl3--wg?t=163)
 The current node is actually **`n`**, not `i`. I should be comparing the current letter (`d`) against `n`.
+
+## [The Birthday Paradox — 12:13](https://youtu.be/F57Xsl5WOXc?t=733)
+The formula <sup>1</sup>/<sub>2</sub>(1 + <sup>1</sup>/<sub>1-*α*</sub>) is actually the "expected number of operations to find an element," NOT the "expected number of collisions".
+* The two values are related, but they are ***not equal***
+* You can find that derivation here if you're interested: http://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16-28.html#pgfId-980264
