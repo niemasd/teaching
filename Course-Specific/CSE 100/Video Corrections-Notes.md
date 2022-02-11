@@ -41,3 +41,6 @@ The current node is actually **`n`**, not `i`. I should be comparing the current
 The formula <sup>1</sup>/<sub>2</sub>(1 + <sup>1</sup>/<sub>1-*α*</sub>) is actually the "expected number of operations to find an element," NOT the "expected number of collisions".
 * The two values are related, but they are ***not equal***
 * You can find that derivation here if you're interested: http://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16-28.html#pgfId-980264
+
+## [Double Hashing — 6:46](https://youtu.be/EEjdu-85fWQ?t=406)
+*h*<sub>1</sub>(*k*) should be *h*<sub>1</sub>(*x*).
