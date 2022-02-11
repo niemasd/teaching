@@ -33,3 +33,6 @@ O(1) amortized insertion into an unsorted Array List is only possible if we know
 
 ## [MWT Space Complexity — 8:37](https://youtu.be/e-Fie3g62H8?t=517)
 |*∑*|<sup>*k*+1</sup> is the number of ***nodes*** in the MWT, not the number of pointers. Each node has |*∑*| pointers, so the total number of ***pointers*** would be |*∑*|<sup>*k*+2</sup>
+
+## [TST Find — 2:43](https://youtu.be/mAOnwl3--wg?t=163)
+The current node is actually **`n`**, not `i`. I should be comparing the current letter (`d`) against `n`.
