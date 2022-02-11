@@ -50,3 +50,6 @@ In my diagram, I have the input/output stream as a separate box as its correspon
 
 ## [Bitwise I/O](https://youtu.be/nhMs1u9TGNo)
 In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box). Also, I have a bitwise buffer interact directly with memory and directly with an input/output stream, but a better way to draw it would be to have a "bitwise input stream" and "bitwise output stream" with a bitwise buffer ***within*** it.
+
+## [Reading from a Bitwise Buffer — 2:14](https://youtu.be/FwPlWFzlgZo?t=134)
+We are not actually done at `buf >> (7-c)`: this would get the "current" bit into the rightmost spot, but it would accidentally leave the bits to the left of the "current" bit in the number. We actually have to do `(buf >> (7-c)) & 1`, i.e., we have to then `AND` the result with 1 to extract just the rightmost bit.
