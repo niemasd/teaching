@@ -5,4 +5,4 @@ These are corrections/notes for videos in my [*Advanced Data Structures*](https:
 I say [`stringstream`](http://www.cplusplus.com/reference/sstream/stringstream/stringstream/), not "string string".
 
 ## [C++ Memory Diagrams — 2:05](https://youtu.be/Mz_BcInAj6E?t=125)
-Should be `Student`, not `string`.
+Should be `Student`, not [`string`](https://www.cplusplus.com/reference/string/string/).
