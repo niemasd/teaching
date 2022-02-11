@@ -53,3 +53,6 @@ In my diagram, I have the input/output stream as a separate box as its correspon
 
 ## [Reading from a Bitwise Buffer — 2:14](https://youtu.be/FwPlWFzlgZo?t=134)
 We are not actually done at `buf >> (7-c)`: this would get the "current" bit into the rightmost spot, but it would accidentally leave the bits to the left of the "current" bit in the number. We actually have to do `(buf >> (7-c)) & 1`, i.e., we have to then `AND` the result with 1 to extract just the rightmost bit.
+
+## [Dijkstra's Algorithm — 1:15](https://youtu.be/Mz_BcInAj6E?t=75)
+Dijkstra's algorithm requires all edges to be ***non-negative***, not necessarily positive. In other words, edge weights of 0 are fine.
