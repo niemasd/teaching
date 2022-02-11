@@ -8,4 +8,4 @@ I say [`stringstream`](http://www.cplusplus.com/reference/sstream/stringstream/s
 Should be "And this `Student` object is called `s1`", not "And this [`string`](https://www.cplusplus.com/reference/string/string/) object is called `s1`".
 
 ## [AVL Rotations — 10:46](https://youtu.be/xzmLuS0ZJmA?t=646)
-I accidentally said "left child of 5," but I meant to say "right child of 5" (which is what I correctly drew in the tree).
+I accidentally said "right child of 8" and "left child of 5," but I meant to say "left child of 8" and "right child of 5" (which is what I correctly drew in the tree).
