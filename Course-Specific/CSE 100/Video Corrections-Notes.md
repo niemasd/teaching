@@ -47,3 +47,6 @@ The formula <sup>1</sup>/<sub>2</sub>(1 + <sup>1</sup>/<sub>1-*α*</sub>) is act
 
 ## [Bytewise I/O](https://youtu.be/txWMqAg6x08)
 In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box).
+
+## [Bitwise I/O](https://youtu.be/nhMs1u9TGNo)
+In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box). Also, I have a bitwise buffer interact directly with memory and directly with an input/output stream, but a better way to draw it would be to have a "bitwise input stream" and "bitwise output stream" with a bitwise buffer ***within*** it.
