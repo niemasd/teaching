@@ -1,4 +1,4 @@
-Originally written by Sravya Balasa
+Originally written by [Sravya Balasa](https://www.linkedin.com/in/sravyabalasa/)
 
 # Q: What is GDB?
 **GDB** is the **G**NU **D**e**b**ugger, a portable system that runs on many Unix-like systems. It is especially useful when debugging C/C++ programs, such as in CSE 100!
