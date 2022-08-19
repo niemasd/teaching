@@ -34,4 +34,4 @@ $ gdb someProgram
 
 This will then give you a line number where the issue is, or tell you what's going on. If you don't see anything, run `bt` (or `backtrace`) to view the entire call stack.
 
-More help on GDB — Check out the [GDB Cheatsheet](GDB Cheatsheet.md)!
+More help on GDB — Check out the [GDB Cheatsheet](GDB%20Cheatsheet.md)!
