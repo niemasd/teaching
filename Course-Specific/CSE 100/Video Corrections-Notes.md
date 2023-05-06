@@ -51,10 +51,10 @@ In my diagram, I have the input/output stream as a separate box as its correspon
 ## [Designing an Optimal Bloom Filter - 9:59](https://www.youtube.com/watch?v=Fm9idTkZxHg&t=599s)
 This is essentially a multivariable minimization problem.
 
-Take the gradient of $\epsilon (k,m,n)$ and set each component to 0 to find critical points: 
+Take the gradient of $\epsilon (k,m,n)$ and set each component to 0 to find critical points:
 $\nabla \epsilon(k,m,n) = \vec{0}$
 $(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\frac{\partial \epsilon}{\partial n}) = (0,0,0)$
- Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
+Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
 
 Just minimizing k:
 $\epsilon \approx (1-e^{\frac{-kn}{m}})^k$
@@ -66,7 +66,6 @@ Let $\alpha  = e^{-\frac{n}{m}k}$
 $ln(\alpha) = -\frac{n}{m}k$ where $n,k,m > 0$
 $k = -\frac{m}{n}ln(\alpha)$ where $n,k,m > 0$
 To minimize k, we need to maximize $\alpha$
-
 
 $0 = ln(1 - \alpha) - ln(\alpha) \frac{\alpha}{1-\alpha}$
 $\because$ argument of one natural log term is $1 - \alpha:$
@@ -104,7 +103,8 @@ The  $k$ that minimizes FP probability is $k = \frac{m}{n} ln(2)$ hash functions
 
 Given that $k$ is now known, in terms of $n$ and $m$, we can elimiante $k$ in $\epsilon$ by substitusion:
 $\epsilon=\left(1-e^{-\frac{n}{m}k}\right)^{k}$
-$\epsilon=\left(1-e^{-\frac{n}{m}\left(\frac{m}{n}\ln\left(2\right)\right)}\right)^{\left(\frac{m}{n}\ln\left(2\right)\right)}$
+$\epsilon=\left(1-e^{-\frac{n}{m}\left(\frac{m}{n}\ln\left(2\right)\right)}\right)^{\left(\frac{m
+{n}\ln\left(2\right)\right)}$
 $\epsilon=\left(1-e^{-\ln\left(2\right)}\right)^{\left(\frac{m}{n}\ln\left(2\right)\right)}$
 $\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(1-e^{-\ln\left(2\right)}\right)$
 $\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(1-\frac{1}{2}\right)$
