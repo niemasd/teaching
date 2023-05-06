@@ -48,13 +48,12 @@ The formula <sup>1</sup>/<sub>2</sub>(1 + <sup>1</sup>/<sub>1-*α*</sub>) is act
 ## [Bytewise I/O](https://youtu.be/txWMqAg6x08)
 In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box).
 
-## [Designing an Optimal Bloom Filter - 9:59](https://www.youtube.com/watch?v=Fm9idTkZxHg&t=599s)
+## [Designing an Optimal Bloom Filter — 9:59](https://www.youtube.com/watch?v=Fm9idTkZxHg&t=599s)
 This is essentially a multivariable minimization problem.
 
 Take the gradient of $\epsilon (k,m,n)$ and set each component to 0 to find critical points:
 
 $\nabla \epsilon(k,m,n) = \vec{0}$
-
 $(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\frac{\partial \epsilon}{\partial n}) = (0,0,0)$
 
 Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
