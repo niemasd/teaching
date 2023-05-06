@@ -57,7 +57,7 @@ $(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\fra
 Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
 
 Just minimizing $k$:\
-$\epsilon \approx (1-e^{\frac{-kn}{m}})^k$
+$\epsilon \approx (1-e^{\frac{-kn}{m}})^k$\
 $ln(\epsilon) \approx k \cdot ln(1 - e^{-\frac{n}{m}k})$ (Why [monotic function composition](https://math.stackexchange.com/questions/1204914/monotonicity-and-optima-of-functions) is fine for optimization)\
 $\frac{\partial ln(\epsilon)}{\partial k} = 0$\
 $\frac{\partial \text{ln}(\epsilon)}{\partial k} = \text{ln}(1-e^{-\frac{n}{m}k}) + k (\frac{n}{m}) \cdot \frac{e^{-\frac{n}{m}k}}{1-e^{-\frac{n}{m}k}}$
