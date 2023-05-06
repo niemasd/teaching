@@ -62,7 +62,7 @@ $\frac{\partial \text{ln}(\epsilon)}{\partial k} = \text{ln}(1-e^{-\frac{n}{m}k}
 Let $\alpha  = e^{-\frac{n}{m}k}$\
 $ln(\alpha) = -\frac{n}{m}k$ where $n,k,m > 0$\
 $k = -\frac{m}{n}ln(\alpha)$ where $n,k,m > 0$\
-To minimize k, we need to maximize $\alpha$
+To minimize $k$, we need to maximize $\alpha$
 
 $0 = ln(1 - \alpha) - ln(\alpha) \frac{\alpha}{1-\alpha}$\
 $\because$ argument of one natural log term is $1 - \alpha:$\
