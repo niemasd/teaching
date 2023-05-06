@@ -110,7 +110,7 @@ $\ln\left(\epsilon\right)=-\frac{m}{n}\left(\ln\left(2\right)\right)^{2}$
 Solve for $m$:\
 Optimal Bloom Filter length is $m=-\frac{n\cdot\ln\left(\epsilon\right)}{\left(\ln\left(2\right)\right)^{2}}$
 
-See Stepik [5.9.7](https://stepik.org/lesson/330394/step/7?unit=313764) on how to realte both $m$ and $k$ (with substitution) to the Probability of the False Positives ($\epsilon$) when designing the Bloom Filter.
+See Stepik [5.9.7](https://stepik.org/lesson/330394/step/7?unit=313764) on how to relate both $m$ and $k$ (with substitution) to the Probability of the False Positives ($\epsilon$) when designing the Bloom Filter.
 
 ## [Bytewise I/O](https://youtu.be/txWMqAg6x08)
 In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box).
