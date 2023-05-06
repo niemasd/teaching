@@ -52,8 +52,11 @@ In my diagram, I have the input/output stream as a separate box as its correspon
 This is essentially a multivariable minimization problem.
 
 Take the gradient of $\epsilon (k,m,n)$ and set each component to 0 to find critical points:
+
 $\nabla \epsilon(k,m,n) = \vec{0}$
+
 $(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\frac{\partial \epsilon}{\partial n}) = (0,0,0)$
+
 Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
 
 Just minimizing k:
