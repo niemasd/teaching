@@ -51,73 +51,69 @@ In my diagram, I have the input/output stream as a separate box as its correspon
 ## [Designing an Optimal Bloom Filter — 9:59](https://www.youtube.com/watch?v=Fm9idTkZxHg&t=599s)
 This is essentially a multivariable minimization problem.
 
-Take the gradient of $\epsilon (k,m,n)$ and set each component to 0 to find critical points:
-
-$\nabla \epsilon(k,m,n) = \vec{0}$
-$(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\frac{\partial \epsilon}{\partial n}) = (0,0,0)$
-
+Take the gradient of $\epsilon (k,m,n)$ and set each component to 0 to find critical points:\
+$\nabla \epsilon(k,m,n) = \vec{0}$\
+$(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\frac{\partial \epsilon}{\partial n}) = (0,0,0)$\
 Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
 
-Just minimizing k:
+Just minimizing k:\
 $\epsilon \approx (1-e^{\frac{-kn}{m}})^k$
-$ln(\epsilon) \approx k \cdot ln(1 - e^{-\frac{n}{m}k})$ (Why [monotic function composition](https://math.stackexchange.com/questions/1204914/monotonicity-and-optima-of-functions) is fine for optimization)
-$\frac{\partial ln(\epsilon)}{\partial k} = 0$
-$\frac{\partial ln(\epsilon)}{\partial k} = ln(1-e^{-\frac{n}{m}k}) + k (\frac{n}{m}) \cdot \frac{e^{-\frac{n}{m}k}}{1-e^{-\frac{n}{m}k}}$
+$ln(\epsilon) \approx k \cdot ln(1 - e^{-\frac{n}{m}k})$ (Why [monotic function composition](https://math.stackexchange.com/questions/1204914/monotonicity-and-optima-of-functions) is fine for optimization)\
+$\frac{\partial ln(\epsilon)}{\partial k} = 0$\
+$\frac{\partial \text{ln}(\epsilon)}{\partial k} = \text{ln}(1-e^{-\frac{n}{m}k}) + k (\frac{n}{m}) \cdot \frac{e^{-\frac{n}{m}k}}{1-e^{-\frac{n}{m}k}}$
 
-Let $\alpha  = e^{-\frac{n}{m}k}$
-$ln(\alpha) = -\frac{n}{m}k$ where $n,k,m > 0$
-$k = -\frac{m}{n}ln(\alpha)$ where $n,k,m > 0$
+Let $\alpha  = e^{-\frac{n}{m}k}$\
+$ln(\alpha) = -\frac{n}{m}k$ where $n,k,m > 0$\
+$k = -\frac{m}{n}ln(\alpha)$ where $n,k,m > 0$\
 To minimize k, we need to maximize $\alpha$
 
-$0 = ln(1 - \alpha) - ln(\alpha) \frac{\alpha}{1-\alpha}$
-$\because$ argument of one natural log term is $1 - \alpha:$
-$1- \alpha > 0 \leftrightarrow \alpha < 1$
-$\because (1 - \alpha)$ is in the denominator:
-$1 - \alpha \neq 0 \leftrightarrow \alpha \neq 1$
-$\because$ argument of another natural log term is $\alpha:$
-$\alpha > 0$
+$0 = ln(1 - \alpha) - ln(\alpha) \frac{\alpha}{1-\alpha}$\
+$\because$ argument of one natural log term is $1 - \alpha:$\
+$1- \alpha > 0 \leftrightarrow \alpha < 1$\
+$\because (1 - \alpha)$ is in the denominator:\
+$1 - \alpha \neq 0 \leftrightarrow \alpha \neq 1$\
+$\because$ argument of another natural log term is $\alpha:$\
+$\alpha > 0$\
 $\therefore \alpha \in (0,1)$
 
-$0 = (1 - \alpha)ln(1 - \alpha) - \alpha ln(\alpha)$
-$0 = ln(1 - \alpha) - \alpha ln(1 - \alpha) - \alpha ln(\alpha)$
-$e^0 = e^{ln(1 - \alpha) - \alpha ln(1 - \alpha) - \alpha ln(\alpha)}$
-$1 = e^{ln(1 - \alpha)} e^{-\alpha ln(1 - \alpha)}e^{-\alpha ln(\alpha)}$
-$1 = (1 - \alpha)(1 - \alpha)^{- \alpha} \alpha^{-\alpha}$
-$1 = (1 - \alpha)\frac{1}{(1 - \alpha)^{\alpha}}\frac{1}{\alpha^{\alpha}}$
-$1 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}}$
-Codomain Translation doesn't affect the curvature of a curve; the value in the domain for optimization is still the same:
-$1-1 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$
+$0 = (1 - \alpha)ln(1 - \alpha) - \alpha ln(\alpha)$\
+$0 = ln(1 - \alpha) - \alpha ln(1 - \alpha) - \alpha ln(\alpha)$\
+$e^0 = e^{ln(1 - \alpha) - \alpha ln(1 - \alpha) - \alpha ln(\alpha)}$\
+$1 = e^{ln(1 - \alpha)} e^{-\alpha ln(1 - \alpha)}e^{-\alpha ln(\alpha)}$\
+$1 = (1 - \alpha)(1 - \alpha)^{- \alpha} \alpha^{-\alpha}$\
+$1 = (1 - \alpha)\frac{1}{(1 - \alpha)^{\alpha}}\frac{1}{\alpha^{\alpha}}$\
+$1 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}}$\
+Codomain Translation doesn't affect the curvature of a curve; the value in the domain for optimization is still the same:\
+$1-1 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$\
 $0 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$
 
-Let $r(\alpha) = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$
-Need to find when $r(\alpha) = 1-1 = 0$
-Using a [calculator](https://www.desmos.com/calculator/1hw3gznghd):
-
-![image](https://user-images.githubusercontent.com/69172764/236611213-c1aab1d2-065f-4c16-b6dc-5a663c084c74.png)
+Let $r(\alpha) = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$\
+Need to find when $r(\alpha) = 1-1 = 0$\
+Using a [calculator](https://www.desmos.com/calculator/1hw3gznghd):\
+<img src="https://user-images.githubusercontent.com/69172764/236611213-c1aab1d2-065f-4c16-b6dc-5a663c084c74.png" width=50% height=50%>
 
 $\alpha = \frac{1}{2}$ is a critical point and $r'(\frac{1}{2}) < 0$. The second partial derivative is negative so we maximize at $\alpha  = \frac{1}{2}$
 
-Since $k = -\frac{m}{n}ln(\alpha)$ and $\alpha = \frac{1}{2}$ minimizes $k$
-$k = -\frac{m}{n}ln(\frac{1}{2})$
+Since $k = -\frac{m}{n}ln(\alpha)$ and $\alpha = \frac{1}{2}$ minimizes $k$\
+$k = -\frac{m}{n}ln(\frac{1}{2})$\
 $k = \frac{m}{n} ( -ln(\frac{1}{2}))$
 
-The  $k$ that minimizes FP probability is $k = \frac{m}{n} ln(2)$ hash functions.
+The $k$ that minimizes FP probability is $k = \frac{m}{n} ln(2)$ hash functions.
 
-Given that $k$ is now known, in terms of $n$ and $m$, we can elimiante $k$ in $\epsilon$ by substitusion:
-$\epsilon=\left(1-e^{-\frac{n}{m}k}\right)^{k}$
-$\epsilon=\left(1-e^{-\frac{n}{m}\left(\frac{m}{n}\ln\left(2\right)\right)}\right)^{\left(\frac{m
-{n}\ln\left(2\right)\right)}$
-$\epsilon=\left(1-e^{-\ln\left(2\right)}\right)^{\left(\frac{m}{n}\ln\left(2\right)\right)}$
-$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(1-e^{-\ln\left(2\right)}\right)$
-$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(1-\frac{1}{2}\right)$
-$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(\frac{1}{2}\right)$
-$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\left(-\ln\left(2\right)\right)$
+Given that $k$ is now known, in terms of $n$ and $m$, we can elimiante $k$ in $\epsilon$ by substitusion:\
+$\epsilon=\left(1-e^{-\frac{n}{m}k}\right)^{k}$\
+$\epsilon=\left(1-e^{-\frac{n}{m}\left(\frac{m}{n}\ln\left(2\right)\right)}\right)^{\left(\frac{m}{n}\ln\left(2\right)\right)}$\
+$\epsilon=\left(1-e^{-\ln\left(2\right)}\right)^{\left(\frac{m}{n}\ln\left(2\right)\right)}$\
+$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(1-e^{-\ln\left(2\right)}\right)$\
+$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(1-\frac{1}{2}\right)$\
+$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\ln\left(\frac{1}{2}\right)$\
+$\ln\left(\epsilon\right)=\left(\frac{m}{n}\ln\left(2\right)\right)\left(-\ln\left(2\right)\right)$\
 $\ln\left(\epsilon\right)=-\frac{m}{n}\left(\ln\left(2\right)\right)^{2}$
 
-Solve for $m$:
+Solve for $m$:\
 Optimal Bloom Filter length is $m=-\frac{n\cdot\ln\left(\epsilon\right)}{\left(\ln\left(2\right)\right)^{2}}$
 
-See Stepik [5.9.7](https://stepik.org/lesson/330394/step/7?unit=313764) on how we can use $m$ and $k$ (just some substitution) to relate both to the Probability of the False Positives ($\epsilon$) when designing the Bloom Filter
+See Stepik [5.9.7](https://stepik.org/lesson/330394/step/7?unit=313764) on how we can use $m$ and $k$ (just some substitution) to relate both to the Probability of the False Positives ($\epsilon$) when designing the Bloom Filter.
 
 ## [Bitwise I/O](https://youtu.be/nhMs1u9TGNo)
 In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box). Also, I have a bitwise buffer interact directly with memory and directly with an input/output stream, but a better way to draw it would be to have a "bitwise input stream" and "bitwise output stream" with a bitwise buffer ***within*** it.
