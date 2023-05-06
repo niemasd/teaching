@@ -80,7 +80,7 @@ $1 = e^{ln(1 - \alpha)} e^{-\alpha ln(1 - \alpha)}e^{-\alpha ln(\alpha)}$\
 $1 = (1 - \alpha)(1 - \alpha)^{- \alpha} \alpha^{-\alpha}$\
 $1 = (1 - \alpha)\frac{1}{(1 - \alpha)^{\alpha}}\frac{1}{\alpha^{\alpha}}$\
 $1 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}}$\
-Codomain Translation doesn't affect the curvature of a curve; the value in the domain for optimization is still the same:\
+Codomain Translation doesn't affect the curvature of a curve; the optimizer's value in the domain for optimization is still the same:\
 $1-1 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$\
 $0 = \frac{1}{(1 - \alpha)^{\alpha - 1}}\frac{1}{\alpha^{\alpha}} - 1$
 
