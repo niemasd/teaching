@@ -56,7 +56,7 @@ $\nabla \epsilon(k,m,n) = \vec{0}$\
 $(\frac{\partial \epsilon}{\partial k},\frac{\partial \epsilon}{\partial m},\frac{\partial \epsilon}{\partial n}) = (0,0,0)$\
 Apply the Hessian or the Jacobian to figure out whether the critical points are maxima/minima, or saddle/inflection points.
 
-Just minimizing k:\
+Just minimizing $k$:\
 $\epsilon \approx (1-e^{\frac{-kn}{m}})^k$
 $ln(\epsilon) \approx k \cdot ln(1 - e^{-\frac{n}{m}k})$ (Why [monotic function composition](https://math.stackexchange.com/questions/1204914/monotonicity-and-optima-of-functions) is fine for optimization)\
 $\frac{\partial ln(\epsilon)}{\partial k} = 0$\
@@ -113,7 +113,7 @@ $\ln\left(\epsilon\right)=-\frac{m}{n}\left(\ln\left(2\right)\right)^{2}$
 Solve for $m$:\
 Optimal Bloom Filter length is $m=-\frac{n\cdot\ln\left(\epsilon\right)}{\left(\ln\left(2\right)\right)^{2}}$
 
-See Stepik [5.9.7](https://stepik.org/lesson/330394/step/7?unit=313764) on how we can use $m$ and $k$ (just some substitution) to relate both to the Probability of the False Positives ($\epsilon$) when designing the Bloom Filter.
+See Stepik [5.9.7](https://stepik.org/lesson/330394/step/7?unit=313764) on how to realte both $m$ and $k$ (with substitution) to the Probability of the False Positives ($\epsilon$) when designing the Bloom Filter.
 
 ## [Bitwise I/O](https://youtu.be/nhMs1u9TGNo)
 In my diagram, I have the input/output stream as a separate box as its corresponding buffer, but a better way to think about it is that the input/output stream has a buffer ***within*** it (i.e., the "buffer" box would be ***inside*** of the "input" or "output stream" box). Also, I have a bitwise buffer interact directly with memory and directly with an input/output stream, but a better way to draw it would be to have a "bitwise input stream" and "bitwise output stream" with a bitwise buffer ***within*** it.
