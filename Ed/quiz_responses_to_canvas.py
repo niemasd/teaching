@@ -6,7 +6,6 @@ Niema Moshiri 2020
 from csv import reader,writer
 from os.path import isfile
 from sys import stderr
-#from xlrd import open_workbook
 
 if __name__ == "__main__":
     import argparse
@@ -55,9 +54,9 @@ if __name__ == "__main__":
     # parse Ed Quiz Response
     quiz_score = dict()
     for row in reader(open(args.ed_quiz_responses)):
-        email = row[1].strip()
-        if email == 'email':
-            continue # skip header line
+        email = row[0].encode('ascii', 'ignore').decode().strip().lower()
+        if email in {'submissions', 'email', ''}:
+            continue # skip header lines
         score = 0
         for col in ed_columns:
             if col >= len(row):
