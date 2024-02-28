@@ -55,13 +55,13 @@ if __name__ == "__main__":
     quiz_score = dict()
     for row in reader(open(args.ed_quiz_responses)):
         email = row[0].encode('ascii', 'ignore').decode().strip().lower()
-        if email in {'submissions', 'email', ''}:
+        if email in {'', 'email', 'users', 'submissions'}:
             continue # skip header lines
         score = 0
         for col in ed_columns:
             if col >= len(row):
                 raise ValueError("Ed column out-of-bounds: %d" % col)
-            score += int(row[col])
+            score += float(row[col])
         uname = email.split('@')[0] # use usernames as keys instead of emails
         if uname not in quiz_score or score > quiz_score[uname]:
             quiz_score[uname] = score
