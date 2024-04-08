@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 '''
-Given one or more Ed Quiz Response CSVs, create a TSV containing the submission times for all questions for all students
+Given one or more Ed Quiz Response CSVs, create a TSV containing the submission times for all questions for all students.
+
+Make sure to go to the exam Lesson, click "...", click "Download Lesson Quiz Responses...", click the ">Advanced" accordion, and check "Use Saved Date".
+Otherwise, all question timestamps will be the overall exam submission time.
+
 Niema Moshiri 2024
 '''
 from csv import reader
