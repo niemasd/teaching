@@ -7,8 +7,16 @@ Niema Moshiri 2024
 from datetime import datetime
 from os.path import isfile
 
-def parse_ed_timestamp(s):
-    return datetime.strptime(s, '%d %b %Y %H:%M:%S %Z')
+def parse_ed_timestamp(s, empty='max'):
+    if s == '':
+        if empty == 'max':
+            return datetime.max
+        elif empty == 'min':
+            return datetime.min
+        else:
+            raise ValueError("Invalid empty handling: %s" % empty)
+    else:
+        return datetime.strptime(s, '%d %b %Y %H:%M:%S %Z')
 
 if __name__ == "__main__":
     # parse user args
