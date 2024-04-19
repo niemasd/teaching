@@ -9,7 +9,6 @@ Niema Moshiri 2024
 '''
 from csv import reader
 from os.path import isfile
-ROW_SKIP = {'', 'email', 'submissions'}
 
 if __name__ == "__main__":
     import argparse
@@ -24,19 +23,23 @@ if __name__ == "__main__":
     # parse submission times
     times = dict() # times[email][fn] = list of submission times for student `email` in `fn`
     num_questions = dict() # num_questions[fn] = number of questions in `fn`
+    question_cols = None # list of indices containing question timestamps
     for fn in args.in_files:
         for row in reader(open(fn)):
-            if row[0].strip().lower() in ROW_SKIP:
-                continue
-            email = row[0].strip(); ind = 9
-            if email not in times:
-                times[email] = dict()
-            if fn not in times[email]:
-                times[email][fn] = list()
-            while ind < len(row):
-                times[email][fn].append(row[ind].strip()); ind += 4
-            if fn not in num_questions:
-                num_questions[fn] = len(times[email][fn])
+            if row[0].upper().strip().startswith('EMAIL'):
+                question_cols = [col for col in range(len(row)) if row[col].strip().upper().endswith(' AT')]
+            elif '@' in row[0]:
+                if question_cols is None:
+                    raise ValueError("Unable to parse timestamp columns from header: %s" % fn)
+                email = row[0].strip()
+                if email not in times:
+                    times[email] = dict()
+                if fn not in times[email]:
+                    times[email][fn] = list()
+                for ind in question_cols:
+                    times[email][fn].append(row[ind].strip())
+                if fn not in num_questions:
+                    num_questions[fn] = len(times[email][fn])
 
     # write output
     if args.output == 'stdout':
