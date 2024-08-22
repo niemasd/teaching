@@ -21,6 +21,7 @@ from runpy import run_path
 from unittest import TestCase
 
 # constants
+PL_RUN_TEST_PY_VERSION = "0.0.1"
 ZERO_THRESH = 0.000001
 
 # run grader
