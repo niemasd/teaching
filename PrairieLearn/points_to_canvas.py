@@ -63,11 +63,12 @@ if __name__ == "__main__":
         elif 'Points Possible' in student or 'Student, Test' in student: # skip dummy rows
             pass
         else:
+            curr_score = None
             if sis_login_ID in quiz_score:
                 curr_score = quiz_score[sis_login_ID]
-            elif sis_login_ID in canvas2pl and canvas2pl[sis_login_ID].split('@')[0] in quiz_score:
-                curr_score = quiz_score[canvas2pl[sis_login_ID].split('@')[0]]
-            else:
+            if sis_login_ID in canvas2pl and canvas2pl[sis_login_ID].split('@')[0] in quiz_score:
+                curr_score = max(curr_score, quiz_score[canvas2pl[sis_login_ID].split('@')[0]])
+            if curr_score is None:
                 stderr.write("CANVAS STUDENT NOT FOUND IN PRAIRIELEARN: %s\n" % sis_login_ID); curr_score = 0
             out_csv.writerow([student, ID, sis_user_ID, sis_login_ID, section, str(curr_score)])
     args.output.close()
