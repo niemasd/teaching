@@ -66,8 +66,13 @@ if __name__ == "__main__":
             curr_score = None
             if sis_login_ID in quiz_score:
                 curr_score = quiz_score[sis_login_ID]
-            if sis_login_ID in canvas2pl and canvas2pl[sis_login_ID].split('@')[0] in quiz_score:
-                curr_score = max(curr_score, quiz_score[canvas2pl[sis_login_ID].split('@')[0]])
+            if sis_login_ID in canvas2pl:
+                tmp_s = canvas2pl[sis_login_ID].split('@')[0]
+                if tmp_s in quiz_score:
+                    if curr_score is None:
+                        curr_score = quiz_score[tmp_s]
+                    else:
+                        curr_score = max(curr_score, quiz_score[tmp_s])
             if curr_score is None:
                 stderr.write("CANVAS STUDENT NOT FOUND IN PRAIRIELEARN: %s\n" % sis_login_ID); curr_score = 0
             out_csv.writerow([student, ID, sis_user_ID, sis_login_ID, section, str(curr_score)])
