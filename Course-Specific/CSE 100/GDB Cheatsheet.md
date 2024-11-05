@@ -66,6 +66,13 @@ Oh no! Your program segfaulted ): GDB has a command `backtrace` which prints out
 
 This is especially useful to see which functions/lines your program went through before failure.
 
+## Up
+`up`
+
+Travel up the function call stack by a single stack frame (i.e. a single function 
+call)
+
+
 # Notes
 * `Ctrl-d` or `quit` exits the program
 * GDB remembers the last command you executed, so you can repeatedly press `Enter` if you're executing the same command over and over.
