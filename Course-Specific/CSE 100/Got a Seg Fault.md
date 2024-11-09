@@ -35,8 +35,10 @@ $ gdb someProgram
 
 This will then give you a line number where the issue is, or tell you what's going on. 
 
+## Unfamiliar Code
+
 Once you encounter the seg fault after running, you may encounter an unfamiliar 
-line of code, such as below:
+line of code, an example of which is shown below:
 
 ```
 Program received signal SIGSEGV, Segmentation fault.
@@ -49,7 +51,7 @@ Fear not! Your code simply may have made a system call incorrectly where the
 actual segmentation fault occurred. You will need to investigate what in your code
 caused a system or other function call to be made incorrectly.
 
-At this point, you may want to look into your code, by printing values, etc, but
+At this point, you will want to look into your code, by printing values, etc, but
 may find that your variables are out of scope; gdb has taken you to the "deeper
 level" system calls. To travel to your function's scope, you can run `bt` (or `backtrace`)  
 to view the entire call stack. You will see  numbers next to each function indicating 
