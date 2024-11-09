@@ -33,7 +33,8 @@ $ gdb someProgram
 (gdb) run arg1 arg2
 ```
 
-This will then give you a line number where the issue is, or tell you what's going on. 
+This will then give you a line number where the issue is, or tell you what's going on.  
+If you don't see anything, run `bt` (or `backtrace`) to view the entire call stack.
 
 ## Unfamiliar Code
 
