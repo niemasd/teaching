@@ -44,4 +44,4 @@ We have provided a `Makefile`, but **you are free to modify *anything* in the st
 2. Once compiled, we need to be able to run your `compress` and `uncompress` programs as described above
 
 # Submitting
-Once you are ready to submit your code, click the **"Save & Grade"** button at the bottom-left corner of this panel. Your code **will not** submit automatically: you **must** submit your code by clicking this button before the deadline, otherwise your code **will not be accepted**.
+Once you are ready to submit your code, click the **"Save & Grade"** button. Your code **will not** submit automatically: you **must** submit your code by clicking this button before the deadline, otherwise your code **will not be accepted**.
