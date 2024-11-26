@@ -1,4 +1,5 @@
-Originally written by [Sravya Balasa](https://www.linkedin.com/in/sravyabalasa/)
+Originally written by [Sravya Balasa](https://www.linkedin.com/in/sravyabalasa/)\
+Additions made by [Aatash Pestonjamasp](https://www.linkedin.com/in/aatash-pestonjamasp)
 
 # Q: What is GDB?
 **GDB** is the **G**NU **D**e**b**ugger, a portable system that runs on many Unix-like systems. It is especially useful when debugging C/C++ programs, such as in CSE 100!
@@ -65,6 +66,41 @@ You can also use one of these format specifiers, which allow you to see your out
 Oh no! Your program segfaulted ): GDB has a command `backtrace` which prints out the stack trace from your program until failure.
 
 This is especially useful to see which functions/lines your program went through before failure.
+
+## Frame
+`frame i`
+
+Allows you to travel directly to function stack frame `i` (ex. travel to `frame 2`).
+This is especially useful if you have a seg fault and want to print out values
+from your code's stack frame!
+
+## Up
+`up`
+
+Travel up the function call stack by a single stack frame (i.e. a single function 
+call). Useful if you have a seg fault and see an unfamiliar line of code, as you
+can use it to travel up to your code.
+
+There are also other variations including:
+* `up i`
+
+This allows you to travel up a variable `i` number of stack frames (ex. `up 2` 
+stack frames).
+
+## Down
+`down`
+
+Travel down the function call stack by a single stack frame (i.e. a single function 
+call). Useful if you wish to check the values of other function calls/ frames at 
+any given point.
+
+There are also other variations including:
+* `down i`
+
+This allows you to travel down a variable `i` number of stack frames (ex. `down 2` 
+stack frames).
+
+
 
 # Notes
 * `Ctrl-d` or `quit` exits the program
