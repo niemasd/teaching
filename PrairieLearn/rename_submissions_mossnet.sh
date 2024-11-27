@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rename the contents of an extracted PrairieLearn "Download Best Submissions" zip for MossNet compatibility
+# Rename the contents of an extracted PrairieLearn "Download Best Submitted Files" zip for MossNet compatibility
 # Niema Moshiri 2024
 set -e
 
