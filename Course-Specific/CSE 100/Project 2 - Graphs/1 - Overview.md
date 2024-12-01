@@ -29,8 +29,7 @@ The `<edgelist_csv>` argument is the filename of an [edge list](https://en.wikip
 
 For example, imagine we want to represent the following graph:
 
-<img src="https://g.gravizo.com/svg?
-graph%20G%20%7B%0AA%20--%20B%20%5Blabel%3D0.1%5D%0AA%20--%20C%20%5Blabel%3D0.5%5D%0AB%20--%20C%20%5Blabel%3D0.1%5D%0AB%20--%20D%20%5Blabel%3D0.1%5D%0AE%20--%20F%20%5Blabel%3D0.4%5D%0AF%20--%20G%20%5Blabel%3D0.5%5D%0A%7D">
+<img src="example_graph.png">
 
 We could represent it using the following edge list CSV (note that the order of the rows is arbitrary):
 
