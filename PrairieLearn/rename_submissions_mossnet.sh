@@ -13,7 +13,7 @@ fi
 if [ -d "$2" ] ; then
     echo "Output renamed submissions folder already exists: $2"; exit 1
 fi
-numfiles=$(ls "$1"/*/*/*.cpp | wc -l)
+numfiles=$(find "$1" -type f -name "*.*" | wc -l)
 if [ $numfiles -eq 1 ] ; then
     echo "Invalid PrairieLearn 'Best Submissions' folder: $1"; echo "It should contain student email folders, each of which contains assignment category folders, which contain source code files"; exit 1
 fi
@@ -21,9 +21,9 @@ fi
 # copy files to output directory
 curr=1
 mkdir "$2"
-for f in "$1"/*/*/*.cpp ; do
+for f in $(find "$1" -type f -name "*.*") ; do
     echo -ne "Renaming file $curr of $numfiles...\r"
-    email=$(echo "$f" | rev | cut -d'/' -f3 | rev | grep -oP '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' | head -n 1)
+    email=$(echo "$f" | python3 -c "from sys import stdin; print([s for s in stdin.read().split('/') if '@' in s][0].split('_')[0].strip())")
     dest="$2/$email/$(echo $f | rev | cut -d'/' -f1 | rev | sed 's/.*[0-9]\{4,\}_//')"
     mkdir -p "$2/$email"
     cp "$f" "$dest"
