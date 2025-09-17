@@ -1,6 +1,6 @@
 This page consists of links to books, documentaries, etc. that I personally found helpful in learning about video game history (bold + star indicates that I thought it was especially good).
 It is not comprehensive by any means, and if you or anyone you know has additional recommendations, please let me know, and I can add them.
-Note that many of the books listed below are available for free as eBooks and audiobooks via [Libby through the San Diego County Library](https://www.sdcl.org/faq/libby/).
+Note that many of the books listed below are available for free as eBooks and audiobooks via [Libby](https://libbyapp.com/) through your local public library (e.g. [San Diego County Library](https://www.sdcl.org/faq/libby/)).
 
 # Books / Audiobooks
 * [*Bit by Bit: How Video Games Transformed Our World*](https://www.goodreads.com/book/show/32498160-bit-by-bit) — [Andrew Ervin](https://www.goodreads.com/author/show/3504538.Andrew_Ervin)
