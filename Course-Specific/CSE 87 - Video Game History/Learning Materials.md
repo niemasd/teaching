@@ -1,4 +1,4 @@
-This page consists of links to books, documentaries, etc. that I personally found helpful in learning about video game history (bold indicates that I thought it was especially good).
+This page consists of links to books, documentaries, etc. that I personally found helpful in learning about video game history (bold + star indicates that I thought it was especially good).
 It is not comprehensive by any means, and if you or anyone you know has additional recommendations, please let me know, and I can add them.
 Note that many of the books listed below are available for free as eBooks and audiobooks via [Libby through the San Diego County Library](https://www.sdcl.org/faq/libby/).
 
