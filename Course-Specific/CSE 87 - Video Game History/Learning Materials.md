@@ -1,4 +1,4 @@
-This page consists of links to books, audiobooks, documentaries, etc. that I personally found helpful in learning about video game history (bold indicates that I thought it was especially good).
+This page consists of links to books, documentaries, etc. that I personally found helpful in learning about video game history (bold indicates that I thought it was especially good).
 It is not comprehensive by any means, and if you or anyone you know has additional recommendations, please let me know, and I can add them.
 Note that many of the books listed below are available for free as eBooks and audiobooks via [Libby through the San Diego County Library](https://www.sdcl.org/faq/libby/).
 
@@ -24,13 +24,25 @@ Note that many of the books listed below are available for free as eBooks and au
 * **[*Super Mario: How Nintendo Conquered America*](https://www.goodreads.com/book/show/10660230-super-mario) — [Jeff Ryan](https://www.goodreads.com/author/show/6950052.Jeff_Ryan)**
 
 # Documentaries
+* [*Atari: Game Over*](https://www.imdb.com/title/tt3715406)
 * [*Commodore Story, The*](https://www.imdb.com/title/tt6541512)
 * **[*Console Wars*](https://www.imdb.com/title/tt5215462)**
 * [*FPS: First Person Shooter*](https://www.imdb.com/title/tt28681130)
+* [*From Bedrooms to Billions*](https://www.imdb.com/title/tt2404567)
+* [*From Bedrooms to Billions: The Amiga Years!*](https://www.imdb.com/title/tt4603210)
+* **[*From Bedrooms to Billions: The Playstation Revolution*](https://www.imdb.com/title/tt5843300)**
+* **[*Game Changers*](https://www.imdb.com/title/tt34238877)**
 * [*GoldenEra*](https://www.imdb.com/title/tt11753760)
 * **[*High Score*](https://www.imdb.com/title/tt12759400)**
+* [*Indie Game: The Movie*](https://www.imdb.com/title/tt1942884)
+* [*Insert Coin*](https://www.imdb.com/title/tt11916218)
 * [*King of Kong, The: A Fistful of Quarters*](https://www.imdb.com/title/tt0923752)
+* **[*Legendary Games Chronicle: Final Fantasy*](https://www3.nhk.or.jp/nhkworld/en/shows/final-fantasy)**
+* [*Minecraft: The Story of Mojang*](https://www.imdb.com/title/tt2087878)
+* **[*Power On: The Story of Xbox*](https://www.imdb.com/title/tt16383352)**
 * **[*Pretending I'm a Superman: The Tony Hawk Video Game Story*](https://www.imdb.com/title/tt11698280)**
+* [*Remarkable Life of Ibelin, The*](https://www.imdb.com/title/tt19811010)
+* [*Video Games: The Movie*](https://www.imdb.com/title/tt3214002)
 
 # YouTube Channels
 * [Did You Know Gaming](https://www.youtube.com/@DidYouKnowGamin)
