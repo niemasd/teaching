@@ -45,6 +45,7 @@ Note that many of the books listed below are available for free as eBooks and au
 * [*Video Games: The Movie*](https://www.imdb.com/title/tt3214002)
 
 # YouTube Channels
+* [Ahoy](https://www.youtube.com/@XboxAhoy)
 * [Did You Know Gaming](https://www.youtube.com/@DidYouKnowGamin)
 * [Digital Foundry](https://www.youtube.com/@DigitalFoundry)
 * [Displaced Gamers](https://www.youtube.com/@DisplacedGamers)
