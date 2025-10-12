@@ -50,7 +50,7 @@ Note that many of the books listed below are available for free as eBooks and au
 * [Digital Foundry](https://www.youtube.com/@DigitalFoundry)
 * [Displaced Gamers](https://www.youtube.com/@DisplacedGamers)
 * [Final Fantasy Union](https://www.youtube.com/@FinalFantasyUnion)
-* [Game Sack](https://www.youtube.com/@GameSack)
+* ⭐ **[Game Sack](https://www.youtube.com/@GameSack)**
 * ⭐ **[Gaming Historian](https://www.youtube.com/@GamingHistorian)**
 * ⭐ **[Masahiro Sakurai on Creating Games](https://www.youtube.com/@sora_sakurai_en)**
 * ⭐ **[Modern Vintage Gamer](https://www.youtube.com/@ModernVintageGamer)**
