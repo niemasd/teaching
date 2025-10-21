@@ -46,8 +46,8 @@ Note that many of the books listed below are available for free as eBooks and au
 
 # YouTube Channels
 * [Ahoy](https://www.youtube.com/@XboxAhoy)
-* [Did You Know Gaming](https://www.youtube.com/@DidYouKnowGamin)
-* [Digital Foundry](https://www.youtube.com/@DigitalFoundry)
+* ⭐ [Did You Know Gaming](https://www.youtube.com/@DidYouKnowGamin)
+* ⭐ [Digital Foundry](https://www.youtube.com/@DigitalFoundry)
 * [Displaced Gamers](https://www.youtube.com/@DisplacedGamers)
 * [Final Fantasy Union](https://www.youtube.com/@FinalFantasyUnion)
 * ⭐ **[Game Sack](https://www.youtube.com/@GameSack)**
@@ -56,7 +56,7 @@ Note that many of the books listed below are available for free as eBooks and au
 * ⭐ **[Modern Vintage Gamer](https://www.youtube.com/@ModernVintageGamer)**
 * ⭐ **[My Life in Gaming](https://www.youtube.com/c/mylifeingaming)**
 * [NesHacker](https://www.youtube.com/@NesHacker)
-* [/noclip](https://www.youtube.com/@NoclipDocs)
+* ⭐ [/noclip](https://www.youtube.com/@NoclipDocs)
 * [Retro Game Mechanics Explained](https://www.youtube.com/@RGMechEx)
 * [RetroRGB](https://www.youtube.com/@RetroRGB)
 * [Wrestling With Gaming](https://www.youtube.com/@WrestlingWithGaming)
