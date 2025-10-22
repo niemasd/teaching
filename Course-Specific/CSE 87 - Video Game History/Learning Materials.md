@@ -60,3 +60,6 @@ Note that many of the books listed below are available for free as eBooks and au
 * [Retro Game Mechanics Explained](https://www.youtube.com/@RGMechEx)
 * [RetroRGB](https://www.youtube.com/@RetroRGB)
 * [Wrestling With Gaming](https://www.youtube.com/@WrestlingWithGaming)
+
+# Websites
+* ⭐ **[Sega-16](https://www.sega-16.com)**
