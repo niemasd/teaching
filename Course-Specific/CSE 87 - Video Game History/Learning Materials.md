@@ -18,10 +18,11 @@ Note that many of the books listed below are available for free as eBooks and au
 * [*Play Nice: The Rise, Fall, and Future of Blizzard Entertainment*](https://www.goodreads.com/book/show/207567968-play-nice) — [Jason Schreier](https://www.goodreads.com/author/show/16222011.Jason_Schreier)
 * [*Prepare to Meet Thy Doom: And More True Gaming Stories*](https://www.goodreads.com/book/show/27430491-prepare-to-meet-thy-doom) — [David Kushner](https://www.goodreads.com/author/show/65730.David_Kushner)
 * ⭐ **[*Press Reset: Ruin and Recovery in the Video Game Industry*](https://www.goodreads.com/book/show/55277893-press-reset) — [Jason Schreier](https://www.goodreads.com/author/show/16222011.Jason_Schreier)**
-* [*Shareware Heroes: The renegades who redefined gaming at the dawn of the internet*](https://www.goodreads.com/book/show/61272567-shareware-heroes) — [Richard Moss](https://www.goodreads.com/author/show/17823626.Richard_Moss)
 * ⭐ **[*Replay: The History of Video Games*](https://www.goodreads.com/book/show/8343159-replay) — [Tristan Donovan](https://www.goodreads.com/author/show/4051429.Tristan_Donovan)**
+* [*Shareware Heroes: The renegades who redefined gaming at the dawn of the internet*](https://www.goodreads.com/book/show/61272567-shareware-heroes) — [Richard Moss](https://www.goodreads.com/author/show/17823626.Richard_Moss)
 * ⭐ **[*Sid Meier's Memoir!: A Life in Computer Games*](https://www.goodreads.com/book/show/50489373-sid-meier-s-memoir) — [Sid Meier](https://www.goodreads.com/author/show/5660350.Sid_Meier)**
 * ⭐ **[*Super Mario: How Nintendo Conquered America*](https://www.goodreads.com/book/show/10660230-super-mario) — [Jeff Ryan](https://www.goodreads.com/author/show/6950052.Jeff_Ryan)**
+* ⭐ **[*Super Nintendo: The Game-Changing Company That Unlocked the Power of Play*](https://www.goodreads.com/book/show/233717141-super-nintendo) — [Keza MacDonald](https://www.goodreads.com/author/show/5065542.Keza_MacDonald)**
 
 # Documentaries
 * [*Atari: Game Over*](https://www.imdb.com/title/tt3715406)
