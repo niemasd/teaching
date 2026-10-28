@@ -9,14 +9,14 @@
 8. TBD
 
 # Winter 2027
-1. TBD
-2. TBD
-3. TBD
-4. TBD
-5. TBD
-6. TBD
-7. TBD
-8. TBD
+1. 2027-01-06 - TBD
+2. 2027-01-13 - TBD
+3. 2027-01-20 - TBD
+4. 2027-01-27 - TBD
+5. 2027-02-03 - TBD
+6. 2027-02-10 - TBD
+7. 2027-02-17 - TBD
+8. 2027-02-24 - TBD
 
 # Fall 2025
 1. 2025-10-01 - [*Course Introduction*](https://youtu.be/A608fmXvknw) - Niema Moshiri (UC San Diego)
