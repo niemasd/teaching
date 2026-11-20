@@ -9,14 +9,14 @@
 8. TBD
 
 # Winter 2027
-1. 2027-01-06 - TBD
-2. 2027-01-13 - TBD
-3. 2027-01-20 - TBD
-4. 2027-01-27 - TBD
-5. 2027-02-03 - TBD
-6. 2027-02-10 - TBD
-7. 2027-02-17 - TBD
-8. 2027-02-24 - TBD
+1. 2027-01-06 - *Course Introduction* - Niema Moshiri (UC San Diego)
+2. 2027-01-13 - *That '70s Lecture* - Scott Rudi (Respawn Entertainment)
+3. 2027-01-20 - *History of Nintendo* - Rebekah Valentine (Kotaku)
+4. 2027-01-27 - *History of Branching Narratives and Dialog Choices in Games* - Emma Kidwell (Ruckus Games)
+5. 2027-02-03 - *History of Pokémon Games* - Daniel Dockery (Author)
+6. 2027-02-10 - *The Rise of PC Gaming* - Scott Rudi (Respawn Entertainment)
+7. 2027-02-17 - *History of James Bond Games* - Josh Covel (Still Loading Podcast)
+8. 2027-02-24 - *Game UX Strategy* - Celia Hodent (Author & UX Consultant)
 
 # Fall 2025
 1. 2025-10-01 - [*Course Introduction*](https://youtu.be/A608fmXvknw) - Niema Moshiri (UC San Diego)
